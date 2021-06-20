@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@/controllers/*": ["src/controllers/*"],
+      "@/routes/*": ["src/routes/*"],
+      "@/models": ["src/models"],
+      "@/types/*": ["src/types/*"],
+      "@/interfaces": ["src/interfaces"]
+    },
+    "noImplicitAny": false
+  },
+  "exclude": ["node_modules"]
+}
