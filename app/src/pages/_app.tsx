@@ -1,5 +1,5 @@
-import "../styles/globals.css";
-import "@fontsource/roboto";
+import "../styles/globals.scss";
+
 import type { AppProps /*, AppContext */ } from "next/app";
 
 function MyApp({ Component, pageProps }: AppProps) {

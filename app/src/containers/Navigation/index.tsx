@@ -1,6 +1,7 @@
 import Button from "@/components/Button";
 import React from "react";
 import Link from "next/link";
+import StyledText from "@/components/StyledText";
 import router, { useRouter } from "next/router";
 
 type NavigationProps = {
@@ -13,11 +14,11 @@ const Navigation = ({ title }: NavigationProps) => {
     };
 
     return (
-        <div className="flex justify-between m-4">
+        <div className="flex justify-between m-4 items-center">
             <Link href="/">
-                <a className="">dropshare.io</a>
+                <a className="text-blue-500 font-bold">dropshare.io</a>
             </Link>
-            <h1>{title}</h1>
+            <StyledText text={title} />
             <div className="flex space-x-4">
                 <Button type="secondary">Sign Up</Button>
                 <Button type="primary" onClick={handleLoginClick}>
