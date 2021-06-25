@@ -1,1 +1,1 @@
-export { default as PinController } from './pin'
+export { default as RatingController } from './rating'

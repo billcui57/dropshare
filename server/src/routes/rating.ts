@@ -1,8 +1,10 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express from 'express'
+import { RatingController } from '@/controllers'
 
 
-const getRatings = () => {
+const router = express.Router({ mergeParams: true })
 
+router.get('/', RatingController.list)
 
+export default router
 
-}

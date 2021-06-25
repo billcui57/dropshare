@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "dropshare server",
-  "main": "index.js",
+  "main": "index.ts",
   "license": "MIT",
   "dependencies": {
     "express": "^4.17.1",

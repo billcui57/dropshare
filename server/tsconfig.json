@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
     "target": "es6",
-    "allowJs": true,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
@@ -13,8 +12,8 @@
     "outDir": "dist",
     "baseUrl": ".",
     "paths": {
-      "@/controllers/*": ["src/controllers/*"],
-      "@/routes/*": ["src/routes/*"],
+      "@/controllers": ["src/controllers"],
+      "@/routes": ["src/routes"],
       "@/models": ["src/models"],
       "@/types/*": ["src/types/*"],
       "@/interfaces": ["src/interfaces"]
