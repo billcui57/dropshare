@@ -17,9 +17,12 @@
     "paths": {
       "@/components/*": ["src/components/*"],
       "@/containers/*": ["src/containers/*"],
-      "@/pages/*": ["src/pages/*"]
+      "@/pages/*": ["src/pages/*"],
+      "@/store": ["src/redux/store"],
+      "@/services": ["src/services"]
     },
     "noImplicitAny": false,
+    "types": ["./src/types"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

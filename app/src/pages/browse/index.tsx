@@ -1,15 +1,8 @@
 import React, { useState } from "react";
 import PageHOC from "@/pages/template";
-import Maps from "@/components/Maps";
+import BrowseContainer from "@/containers/Browse";
 
 const BrowsePage = () => {
-    return (
-        <div className={"flex justify-between h-full"}>
-            <h1>hi</h1>
-            <div className={"w-1/2"}>
-                <Maps />
-            </div>
-        </div>
-    );
+  return <BrowseContainer />;
 };
 export default PageHOC({ Component: BrowsePage, title: "What's Nearby" });
