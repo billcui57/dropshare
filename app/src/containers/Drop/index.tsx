@@ -2,8 +2,7 @@ import Button from "@/components/Button";
 import Maps from "@/components/Maps";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
-import { setCurr as setCurrAction } from "src/redux/store/pin";
-import router, { useRouter } from "next/router";
+import { setCurr } from "src/redux/store/pin";
 import DropPinForm from "@/components/DropPinForm";
 
 type DropContainerProps = {
@@ -11,10 +10,10 @@ type DropContainerProps = {
   setCurr: Function;
 };
 
-const DropContainer = ({ currPin, setCurr }: DropContainerProps) => {
+const DropContainer = (props: DropContainerProps) => {
   const renderDropPinForm = () => {
-    if (currPin) {
-      return <DropPinForm pin={currPin} />;
+    if (props.currPin) {
+      return <DropPinForm pin={props.currPin} />;
     }
     return <h1>Drop a pin down first</h1>;
   };
@@ -23,7 +22,7 @@ const DropContainer = ({ currPin, setCurr }: DropContainerProps) => {
     <div className={"flex justify-between h-full"}>
       <div className={"w-1/2"}>{renderDropPinForm()}</div>
       <div className={"w-1/2"}>
-        <Maps setCurr={setCurr} currPin={currPin} />
+        <Maps setCurr={props.setCurr} currPin={props.currPin} />
       </div>
     </div>
   );
@@ -36,6 +35,6 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = { setCurr: setCurrAction };
+const mapDispatchToProps = { setCurr: setCurr };
 
 export default connect(mapStateToProps, mapDispatchToProps)(DropContainer);

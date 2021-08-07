@@ -2,18 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   curr: null,
-  loaded: [
-    {
-      lat: 43.672349272526837,
-      lng: -79.37947646024934,
-      title: "hi",
-    },
-    {
-      lat: 43.665349271526836,
-      lng: -79.37947646024934,
-      title: "lol",
-    },
-  ],
+  justDropped: null,
+  loaded: [],
 };
 
 const currPinsSlice = createSlice({
@@ -23,9 +13,15 @@ const currPinsSlice = createSlice({
     setCurr(state, action) {
       state.curr = action.payload;
     },
+    setLoaded(state, action) {
+      state.loaded = action.payload;
+    },
+    setJustDropped(state, action) {
+      state.justDropped = action.payload;
+    },
   },
 });
 
-export const { setCurr } = currPinsSlice.actions;
+export const { setCurr, setLoaded, setJustDropped } = currPinsSlice.actions;
 
 export default currPinsSlice.reducer;
