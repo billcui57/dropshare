@@ -1,25 +1,39 @@
 import express from "express";
 import { PinService } from "@/services";
 
+const toPinDTO = (pin) => {
+  return {
+    _id: pin._id,
+    title: pin.title,
+    lng: pin.location.coordinates[0],
+    lat: pin.location.coordinates[1],
+  };
+};
+
 const list = async (req, res, next) => {
   const pins = await PinService.list();
-  res.send(pins);
+
+  const pinDTOArr = pins.map((pin) => {
+    return toPinDTO(pin);
+  });
+
+  res.send(pinDTOArr);
 };
 
 const create = async (req, res, next) => {
   const { lng, lat, title } = req.body;
 
   try {
-    PinService.create({
-      longitude: lng,
-      latitude: lat,
+    const pin = await PinService.create({
+      lng: lng,
+      lat: lat,
       title: title,
     });
+
+    return res.send(toPinDTO(pin));
   } catch (err) {
     return next(err);
   }
-
-  return res.sendStatus(200);
 };
 
 export default {
