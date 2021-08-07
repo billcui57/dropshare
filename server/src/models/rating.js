@@ -1,7 +1,6 @@
 import { Schema, model } from 'mongoose'
-import { IRating } from '@/interfaces'
 
-const RatingSchema = new Schema<IRating>({
+const RatingSchema = new Schema({
   user: {
     type: String, required: true
   },
@@ -13,4 +12,4 @@ const RatingSchema = new Schema<IRating>({
   }
 }, { timestamps: true })
 
-export default model<IRating>('RatingSchema', RatingSchema)
+export default model('RatingSchema', RatingSchema)
