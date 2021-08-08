@@ -36,7 +36,19 @@ const create = async (req, res, next) => {
   }
 };
 
+const remove = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const pin = await PinService.remove(_id);
+
+    return res.send(toPinDTO(pin));
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export default {
   list,
   create,
+  remove,
 };
