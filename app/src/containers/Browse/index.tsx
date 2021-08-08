@@ -2,7 +2,7 @@ import Button from "@/components/Button";
 import Maps from "@/components/Maps";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
-import { setCurr, setLoaded } from "src/redux/store/pin";
+import { setCurr, setLoaded, setSelected } from "src/redux/store/pin";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PinService } from "@/services";
@@ -12,7 +12,9 @@ type BrowseContainerProps = {
   loadedPins: Pin[];
   setCurr: Function;
   setLoaded: Function;
-  justDroppedPin: Pin;
+  justDroppedPin?: Pin;
+  selectedPin?: Pin;
+  setSelected: Function;
 };
 
 const BrowseContainer = (props: BrowseContainerProps) => {
@@ -50,6 +52,8 @@ const BrowseContainer = (props: BrowseContainerProps) => {
           setCurr={props.setCurr}
           currPin={props.currPin}
           justDroppedPin={props.justDroppedPin}
+          selectedPin={props.selectedPin}
+          setSelectedPin={props.setSelected}
         />
       </div>
     </div>
@@ -61,12 +65,14 @@ const mapStateToProps = (state: any) => {
     currPin: state.pins.curr,
     loadedPins: state.pins.loaded,
     justDroppedPin: state.pins.justDropped,
+    selectedPin: state.pins.selected,
   };
 };
 
 const mapDispatchToProps = {
   setCurr: setCurr,
   setLoaded: setLoaded,
+  setSelected: setSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(BrowseContainer);

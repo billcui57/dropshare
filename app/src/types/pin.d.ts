@@ -1,6 +1,6 @@
 export type Pin = {
-  _id: String;
-  title: String;
-  lat: Number;
-  lng: Number;
+  _id: string;
+  title: string;
+  lat: number;
+  lng: number;
 };
