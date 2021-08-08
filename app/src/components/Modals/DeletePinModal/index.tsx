@@ -1,17 +1,28 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
+import Button from "@/components/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import { Pin } from "src/types/pin";
+import { PinService } from "@/services";
 
 type DeletePinModalProps = {
+  pin: Pin;
   isOpen: Boolean;
   handleClose: Function;
 };
 
 const DeletePinModal = (props: DeletePinModalProps) => {
+  const handleDelete = () => {
+    PinService.remove(props.pin._id)
+      .then((data) => {
+        props.handleClose();
+      })
+      .catch(() => {});
+  };
+
   return (
     <div>
       <Dialog
@@ -20,21 +31,19 @@ const DeletePinModal = (props: DeletePinModalProps) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{`Delete ${props.pin.title}?`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running.
+            This will remove the pin off the maps. Other users will no longer be
+            able to see it.
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose} color="primary">
-            Disagree
+          <Button onClick={props.handleClose} type="secondary">
+            Cancel
           </Button>
-          <Button onClick={props.handleClose} color="primary" autoFocus>
-            Agree
+          <Button onClick={handleDelete} type="warning">
+            Delete
           </Button>
         </DialogActions>
       </Dialog>

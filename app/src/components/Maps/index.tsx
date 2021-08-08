@@ -2,7 +2,7 @@ import React, { ReactElement, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { Pin } from "src/types/pin";
 import _ from "lodash";
-import { PinView, PinDetailed } from "@/components/Pin";
+import PinView from "@/components/PinView";
 
 type MapProps = {
   currPin?: Pin;
@@ -20,13 +20,8 @@ const Maps = (props: MapProps) => {
 
   const handlePinClick = (pin) => {
     if (props.setSelectedPin) {
+      props.setCurr(undefined);
       props.setSelectedPin(pin);
-    }
-  };
-
-  const handleSelectPinClickAway = (pin) => {
-    if (props.setSelectedPin) {
-      props.setSelectedPin(null);
     }
   };
 
@@ -35,21 +30,6 @@ const Maps = (props: MapProps) => {
 
     if (props.loadedPins) {
       let remainingPins: Pin[] = props.loadedPins;
-      if (props.selectedPin) {
-        pins.push(
-          <PinDetailed
-            title={props.selectedPin.title}
-            lat={props.selectedPin.lat}
-            lng={props.selectedPin.lng}
-            key={props.selectedPin._id}
-            onClickAway={handleSelectPinClickAway}
-          />
-        );
-
-        remainingPins = remainingPins.filter(
-          (pin) => props.selectedPin._id !== pin._id
-        );
-      }
 
       if (props.justDroppedPin) {
         pins.push(
@@ -92,8 +72,6 @@ const Maps = (props: MapProps) => {
         />
       );
     }
-
-    pins = pins.reverse();
 
     return pins;
   };

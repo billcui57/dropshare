@@ -6,6 +6,7 @@ import { setCurr, setLoaded, setSelected } from "src/redux/store/pin";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { PinService } from "@/services";
+import PinDetails from "@/components/PinDetails";
 
 type BrowseContainerProps = {
   currPin?: Pin;
@@ -42,6 +43,7 @@ const BrowseContainer = (props: BrowseContainerProps) => {
   return (
     <div className={"flex justify-between h-full"}>
       <div className={"w-1/2"}>
+        <PinDetails pin={props.selectedPin} />
         <Button onClick={handleDropPin} type="primary">
           {getDropPinText()}
         </Button>
