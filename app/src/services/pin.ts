@@ -10,4 +10,12 @@ const post = async (pin) => {
   return result.data;
 };
 
-export default { list, post };
+const remove = async (pinId) => {
+  const result = await axios.delete(
+    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`
+  );
+
+  return result.data;
+};
+
+export default { list, post, remove };

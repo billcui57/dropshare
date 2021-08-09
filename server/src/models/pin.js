@@ -17,6 +17,10 @@ const PinSchema = new mongoose.Schema(
         required: true,
       },
     },
+    deleted: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );

@@ -5,4 +5,4 @@ import DropContainer from "@/containers/Drop";
 const DropPage = () => {
   return <DropContainer />;
 };
-export default PageHOC({ Component: DropPage, title: "What's Nearby" });
+export default PageHOC({ Component: DropPage, title: "Drop a Pin" });

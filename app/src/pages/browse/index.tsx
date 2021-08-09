@@ -5,4 +5,4 @@ import BrowseContainer from "@/containers/Browse";
 const BrowsePage = () => {
   return <BrowseContainer />;
 };
-export default PageHOC({ Component: BrowsePage, title: "What's Nearby" });
+export default PageHOC({ Component: BrowsePage, title: "Browse Around" });

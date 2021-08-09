@@ -1,77 +1,67 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useState } from "react";
 import GoogleMapReact from "google-map-react";
 import { Pin } from "src/types/pin";
-import classNames from "classnames";
 import _ from "lodash";
-
-const COLORS = {
-  RED: "red",
-  BLUE: "blue",
-  YELLOW: "yellow",
-};
-
-type PinProps = {
-  hover?: Boolean;
-  colour: string;
-  title: String;
-  lat: Number;
-  lng: Number;
-};
-
-const PinView = (props: PinProps) => {
-  const pinClasses = classNames(
-    "rounded-full transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center h-8 w-8",
-    {
-      "bg-blue-400": props.colour == COLORS.BLUE,
-      "bg-red-400": props.colour == COLORS.RED,
-      "bg-yellow-400": props.colour == COLORS.YELLOW,
-    }
-  );
-
-  if (!props.lat || !props.lng) {
-    return null;
-  }
-  return <div className={pinClasses}>{props.title}</div>;
-};
+import PinView from "@/components/PinView";
 
 type MapProps = {
   currPin?: Pin;
   loadedPins?: Pin[];
   setCurr: Function;
   justDroppedPin?: Pin;
+  selectedPin?: Pin;
+  setSelectedPin?: Function;
 };
 
 const Maps = (props: MapProps) => {
   const handleMapClick = ({ x, y, lat, lng, event }) => {
+    if (props.setSelectedPin) {
+      props.setSelectedPin(undefined);
+    }
+
     props.setCurr({ lat: lat, lng: lng });
+  };
+
+  const handlePinClick = (pin) => {
+    if (props.setSelectedPin) {
+      props.setCurr(undefined);
+      props.setSelectedPin(pin);
+    }
   };
 
   const renderPins = () => {
     let pins: ReactElement[] = [];
 
     if (props.loadedPins) {
-      props.loadedPins.forEach((loadedPin, i) => {
-        if (props.justDroppedPin && props.justDroppedPin._id == loadedPin._id) {
-          pins.push(
-            <PinView
-              title={loadedPin.title}
-              lat={loadedPin.lat}
-              lng={loadedPin.lng}
-              key={i}
-              colour="yellow"
-            />
-          );
-        } else {
-          pins.push(
-            <PinView
-              title={loadedPin.title}
-              lat={loadedPin.lat}
-              lng={loadedPin.lng}
-              key={i}
-              colour="blue"
-            />
-          );
-        }
+      let remainingPins: Pin[] = props.loadedPins;
+
+      if (props.justDroppedPin) {
+        pins.push(
+          <PinView
+            title={props.justDroppedPin.title}
+            lat={props.justDroppedPin.lat}
+            lng={props.justDroppedPin.lng}
+            key={props.justDroppedPin._id}
+            colour={"yellow"}
+            onClick={() => handlePinClick(props.justDroppedPin)}
+          />
+        );
+        remainingPins = remainingPins.filter(
+          (pin) => props.justDroppedPin._id !== pin._id
+        );
+      }
+
+      remainingPins.forEach((pin, i) => {
+        pins.push(
+          <PinView
+            title={pin.title}
+            lat={pin.lat}
+            lng={pin.lng}
+            key={pin._id}
+            colour="blue"
+            onClick={() => handlePinClick(pin)}
+          />
+        );
       });
     }
 
@@ -81,7 +71,7 @@ const Maps = (props: MapProps) => {
           title={props.currPin.title}
           lat={props.currPin.lat}
           lng={props.currPin.lng}
-          key="curr"
+          key={props.currPin._id}
           colour="red"
         />
       );
