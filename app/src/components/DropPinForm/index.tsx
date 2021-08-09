@@ -2,19 +2,13 @@ import { TextField } from "@material-ui/core";
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
 import Button from "@/components/Button";
-import { PinService } from "@/services";
-import { useRouter } from "next/router";
-import { setCurr, setJustDropped } from "@/store/pin";
-import { connect } from "react-redux";
 
 type DropPinFormProps = {
   pin: Pin;
-  setCurr: Function;
-  setJustDropped: Function;
+  handleDropPin: Function;
 };
 
 const DropPinForm = (props: DropPinFormProps) => {
-  const router = useRouter();
   const [pinInfo, setPinInfo] = useState<Pin>(props.pin);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,13 +16,9 @@ const DropPinForm = (props: DropPinFormProps) => {
   };
 
   const handlePinSubmit = () => {
-    PinService.post(pinInfo)
-      .then((data) => {
-        props.setJustDropped(data);
-        props.setCurr(null);
-        router.push("/browse");
-      })
-      .catch((err) => console.log(err));
+    //pass validation
+
+    props.handleDropPin(pinInfo);
   };
 
   return (
@@ -44,6 +34,4 @@ const DropPinForm = (props: DropPinFormProps) => {
   );
 };
 
-const mapDispatchToProps = { setCurr: setCurr, setJustDropped: setJustDropped };
-
-export default connect(null, mapDispatchToProps)(DropPinForm);
+export default DropPinForm;
