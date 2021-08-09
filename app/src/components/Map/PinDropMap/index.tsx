@@ -5,7 +5,7 @@ import _ from "lodash";
 import PinView from "@/components/PinView";
 
 type PinDropMapProps = {
-  currPin?: Pin;
+  currPin: Pin;
   setCurr: Function;
 };
 

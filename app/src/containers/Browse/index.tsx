@@ -9,12 +9,12 @@ import { PinService } from "@/services";
 import PinDetails from "@/components/PinDetails";
 
 type BrowseContainerProps = {
-  currPin?: Pin;
+  currPin: Pin;
   loadedPins: Pin[];
   setCurr: Function;
   setLoaded: Function;
-  justDroppedPin?: Pin;
-  selectedPin?: Pin;
+  justDroppedPin: Pin;
+  selectedPin: Pin;
   setSelected: Function;
 };
 
@@ -30,7 +30,7 @@ const BrowseContainer = (props: BrowseContainerProps) => {
   return (
     <div className={"flex justify-between h-full"}>
       <div className={"w-1/2"}>
-        <PinDetails pin={props.selectedPin} />
+        {props.selectedPin && <PinDetails pin={props.selectedPin} />}
       </div>
       <div className={"w-1/2"}>
         <BrowseMap

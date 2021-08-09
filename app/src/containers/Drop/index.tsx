@@ -5,9 +5,10 @@ import { setCurr, setJustDropped } from "src/redux/store/pin";
 import DropPinForm from "@/components/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
+import Button from "@/components/Button";
 
 type DropContainerProps = {
-  currPin?: Pin;
+  currPin: Pin;
   setCurr: Function;
   setJustDropped: Function;
 };
@@ -34,7 +35,12 @@ const DropContainer = (props: DropContainerProps) => {
 
   return (
     <div className={"flex justify-between h-full"}>
-      <div className={"w-1/2"}>{renderDropPinForm()}</div>
+      <div className={"w-1/2"}>
+        <Button type="secondary" onClick={() => router.push("/browse")}>
+          Go Back
+        </Button>
+        {renderDropPinForm()}
+      </div>
       <div className={"w-1/2"}>
         <PinDropMap setCurr={props.setCurr} currPin={props.currPin} />
       </div>
