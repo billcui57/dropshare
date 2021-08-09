@@ -15,6 +15,10 @@ type MapProps = {
 
 const Maps = (props: MapProps) => {
   const handleMapClick = ({ x, y, lat, lng, event }) => {
+    if (props.setSelectedPin) {
+      props.setSelectedPin(undefined);
+    }
+
     props.setCurr({ lat: lat, lng: lng });
   };
 

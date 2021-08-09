@@ -15,14 +15,12 @@ const create = async ({ lng, lat, title }) => {
 };
 
 const remove = async (pinId) => {
-  return await PinModel.updateOne(
+  await PinModel.updateOne(
     {
       _id: pinId,
     },
     {
-      $set: {
-        deleted: true,
-      },
+      deleted: true,
     }
   );
 };

@@ -39,9 +39,8 @@ const create = async (req, res, next) => {
 const remove = async (req, res, next) => {
   const { id } = req.params;
   try {
-    const pin = await PinService.remove(_id);
-
-    return res.send(toPinDTO(pin));
+    await PinService.remove(id);
+    return res.sendStatus(200);
   } catch (err) {
     return next(err);
   }

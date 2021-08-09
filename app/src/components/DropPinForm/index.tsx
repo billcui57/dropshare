@@ -4,7 +4,7 @@ import { Pin } from "src/types/pin";
 import Button from "@/components/Button";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
-import { setCurr, setJustDropped } from "src/redux/store/pin";
+import { setCurr, setJustDropped } from "@/store/pin";
 import { connect } from "react-redux";
 
 type DropPinFormProps = {

@@ -11,11 +11,9 @@ const post = async (pin) => {
 };
 
 const remove = async (pinId) => {
-  const result = await axios.delete(`${process.env.NEXT_PUBLIC_API}/pins`, {
-    params: {
-      id: pinId,
-    },
-  });
+  const result = await axios.delete(
+    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`
+  );
 
   return result.data;
 };

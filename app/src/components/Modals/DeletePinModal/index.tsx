@@ -7,20 +7,25 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { Pin } from "src/types/pin";
 import { PinService } from "@/services";
-
+import { remove } from "@/store/pin";
+import { connect } from "react-redux";
 type DeletePinModalProps = {
   pin: Pin;
   isOpen: Boolean;
   handleClose: Function;
+  remove: Function;
 };
 
 const DeletePinModal = (props: DeletePinModalProps) => {
   const handleDelete = () => {
     PinService.remove(props.pin._id)
       .then((data) => {
+        props.remove(props.pin._id);
         props.handleClose();
       })
-      .catch(() => {});
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -51,4 +56,4 @@ const DeletePinModal = (props: DeletePinModalProps) => {
   );
 };
 
-export default DeletePinModal;
+export default connect(null, { remove: remove })(DeletePinModal);

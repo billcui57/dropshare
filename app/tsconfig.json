@@ -18,7 +18,7 @@
       "@/components/*": ["src/components/*"],
       "@/containers/*": ["src/containers/*"],
       "@/pages/*": ["src/pages/*"],
-      "@/store": ["src/redux/store"],
+      "@/store/*": ["src/redux/store/*"],
       "@/services": ["src/services"]
     },
     "noImplicitAny": false,
