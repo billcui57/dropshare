@@ -23,7 +23,7 @@ const PinDetails = (props: PinDetailsProps) => {
       </div>
       <div>
         <Button
-          type="secondary"
+          type="warning"
           onClick={() => {
             setIsDeleteModalOpen(true);
           }}
