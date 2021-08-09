@@ -1,4 +1,4 @@
-import Maps from "@/components/Maps";
+import { PinDropMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
 import { setCurr, setJustDropped } from "src/redux/store/pin";
@@ -36,7 +36,7 @@ const DropContainer = (props: DropContainerProps) => {
     <div className={"flex justify-between h-full"}>
       <div className={"w-1/2"}>{renderDropPinForm()}</div>
       <div className={"w-1/2"}>
-        <Maps setCurr={props.setCurr} currPin={props.currPin} />
+        <PinDropMap setCurr={props.setCurr} currPin={props.currPin} />
       </div>
     </div>
   );

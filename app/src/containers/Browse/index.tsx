@@ -1,9 +1,9 @@
 import Button from "@/components/Button";
-import Maps from "@/components/Maps";
+import { BrowseMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
 import { setCurr, setLoaded, setSelected } from "src/redux/store/pin";
-import { useRouter } from "next/router";
+
 import { useEffect } from "react";
 import { PinService } from "@/services";
 import PinDetails from "@/components/PinDetails";
@@ -19,19 +19,6 @@ type BrowseContainerProps = {
 };
 
 const BrowseContainer = (props: BrowseContainerProps) => {
-  const router = useRouter();
-  const getDropPinText = () => {
-    let result = "Drop a Pin";
-    if (props.currPin) {
-      result += " here";
-    }
-    return result;
-  };
-
-  const handleDropPin = () => {
-    router.push("/drop");
-  };
-
   useEffect(() => {
     PinService.list()
       .then((data) => {
@@ -44,12 +31,9 @@ const BrowseContainer = (props: BrowseContainerProps) => {
     <div className={"flex justify-between h-full"}>
       <div className={"w-1/2"}>
         <PinDetails pin={props.selectedPin} />
-        <Button onClick={handleDropPin} type="primary">
-          {getDropPinText()}
-        </Button>
       </div>
       <div className={"w-1/2"}>
-        <Maps
+        <BrowseMap
           loadedPins={props.loadedPins}
           setCurr={props.setCurr}
           currPin={props.currPin}
