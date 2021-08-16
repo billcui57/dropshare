@@ -1,4 +1,11 @@
 import classNames from "classnames";
+import {
+  BLUE,
+  WHITE,
+  BLUE_DARK,
+  RED_DARK,
+  RED_DARKER,
+} from "@/constants/colours";
 
 const TYPES = {
   PRIMARY: "primary",
@@ -17,10 +24,11 @@ const Button = ({ type, children, onClick, className }: ButtonProps) => {
   const btnClasses = classNames(
     `w-36 h-12 rounded-lg focus:outline-none ${className}`,
     {
-      "bg-blue-500 text-white hover:bg-blue-600": type == TYPES.PRIMARY,
-      "bg-white bg-opacity-0 hover:bg-opacity-40 text-blue-500 border-blue-500 border-2 ":
+      [`bg-${BLUE} text-${WHITE} hover:bg-${BLUE_DARK}`]: type == TYPES.PRIMARY,
+      [`bg-${WHITE} bg-opacity-0 hover:bg-opacity-40 text-${BLUE} border-${BLUE} border-2`]:
         type == TYPES.SECONDARY,
-      "bg-red-500 text-white hover:bg-red-600": type == TYPES.WARNING,
+      [`bg-${RED_DARKER} text-${WHITE} hover:bg-${RED_DARK}`]:
+        type == TYPES.WARNING,
     }
   );
 
