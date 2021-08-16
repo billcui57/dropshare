@@ -1,7 +1,8 @@
 import PageHOC from "@/pages/template";
+import HomeContainer from "@/containers/Home";
 
 const HomePage = () => {
-  return <h1>hi</h1>;
+  return <HomeContainer />;
 };
 
 export default PageHOC({

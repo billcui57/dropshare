@@ -9,6 +9,7 @@ import { Pin } from "src/types/pin";
 import { PinService } from "@/services";
 import { remove } from "@/store/pin";
 import { connect } from "react-redux";
+import ButtonContainer from "@/components/ButtonContainer";
 type DeletePinModalProps = {
   pin: Pin;
   isOpen: Boolean;
@@ -44,12 +45,14 @@ const DeletePinModal = (props: DeletePinModalProps) => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.handleClose} type="secondary">
-            Cancel
-          </Button>
-          <Button onClick={handleDelete} type="warning">
-            Delete
-          </Button>
+          <ButtonContainer>
+            <Button onClick={props.handleClose} type="secondary">
+              Cancel
+            </Button>
+            <Button onClick={handleDelete} type="warning">
+              Delete
+            </Button>
+          </ButtonContainer>
         </DialogActions>
       </Dialog>
     </div>

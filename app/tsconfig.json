@@ -20,11 +20,13 @@
       "@/pages/*": ["src/pages/*"],
       "@/store": ["src/redux/store"],
       "@/store/*": ["src/redux/store/*"],
-      "@/services": ["src/services"]
+      "@/services": ["src/services"],
+      "@/svg/*": ["src/svg/*"]
     },
     "noImplicitAny": false,
     "types": ["./src/types"]
   },
+
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }
