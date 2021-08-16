@@ -1,18 +1,35 @@
 import classNames from "classnames";
 import React from "react";
 
-type StyledTextProps = {
-  text?: String;
+const SIZES = {
+  SM: "sm",
+  BASE: "base",
+  LG: "lg",
+  DISPLAY: "display",
 };
 
-const StyledText = ({ text }: StyledTextProps) => {
-  const styledTextClasses = classNames("text-2xl font-bold flex");
+type StyledTextProps = {
+  text: string;
+  size: string;
+  className: string;
+};
 
-  if (!text) {
+const StyledText = (props: StyledTextProps) => {
+  const styledTextClasses = classNames(
+    `text-2xl font-bold flex ${props.className}`,
+    {
+      "text-sm": props.size == SIZES.SM,
+      "text-base": props.size == SIZES.BASE,
+      "text-lg": props.size == SIZES.LG,
+      "text-5xl": props.size == SIZES.DISPLAY,
+    }
+  );
+
+  if (!props.text) {
     return null;
   }
 
-  const words: String[] = text.split(" ");
+  const words: String[] = props.text.split(" ");
 
   let display;
 
