@@ -15,11 +15,17 @@ const HomeContainer = () => {
   return (
     <div className="h-4/6 flex justify-center items-center space-x-8">
       <div>
-        <StyledText text="Less wasting," size="display" />
-        <StyledText text="more caring" size="display" className="mb-4" />
+        <StyledText text="Less wasting," size="display" delimiter=" " />
+        <StyledText
+          text="more caring"
+          size="display"
+          className="mb-4"
+          delimiter=" "
+        />
         <Typography
           text="A new and modern way to solve food waste"
           className="mb-8"
+          colour="text"
         />
         <ButtonContainer>
           <Button type="primary" onClick={handleGetStarted}>

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
+import Typography from "@/components/Typography";
+import DeletePinModal from "@/components/Modals/DeletePinModal";
+import Button from "@/components/Button";
 import StyledText from "@/components/StyledText";
-import DeletePinModal from "../Modals/DeletePinModal";
-import Button from "../Button";
+import { SECTION_HEAD } from "@/constants/sizes";
 
 type PinDetailsProps = {
   pin: Pin;
@@ -17,9 +19,12 @@ const PinDetails = (props: PinDetailsProps) => {
 
   return (
     <div>
-      <div className="flex justify-center text-2xl font-bold">
-        <span className="text-blue-500 mr-2">Details about:</span>
-        <span className="text-red-400">{props.pin.title}</span>
+      <div className={`flex justify-center text-${SECTION_HEAD} font-bold`}>
+        <StyledText
+          text={`Details about: ${props.pin.title}`}
+          delimiter=":"
+          size="section-head"
+        />
       </div>
       <div>
         <Button

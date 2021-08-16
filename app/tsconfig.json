@@ -21,7 +21,8 @@
       "@/store": ["src/redux/store"],
       "@/store/*": ["src/redux/store/*"],
       "@/services": ["src/services"],
-      "@/svg/*": ["src/svg/*"]
+      "@/svg/*": ["src/svg/*"],
+      "@/constants/*": ["src/constants/*"]
     },
     "noImplicitAny": false,
     "types": ["./src/types"]
