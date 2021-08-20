@@ -4,7 +4,7 @@ import { Pin } from "src/types/pin";
 import _ from "lodash";
 import PinView from "@/components/PinView";
 import { useRouter } from "next/router";
-import Button from "@/components/Button";
+import Button from "@/components/Input/Button";
 
 type BrowseMapProps = {
   currPin: Pin;

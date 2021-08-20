@@ -1,4 +1,4 @@
-import Button from "@/components/Button";
+import Button from "@/components/Input/Button";
 import { BrowseMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";

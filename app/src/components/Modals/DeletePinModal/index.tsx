@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "@/components/Button";
+import Button from "@/components/Input/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -9,7 +9,7 @@ import { Pin } from "src/types/pin";
 import { PinService } from "@/services";
 import { remove } from "@/store/pin";
 import { connect } from "react-redux";
-import ButtonContainer from "@/components/ButtonContainer";
+import ButtonContainer from "@/components/Input/ButtonContainer";
 type DeletePinModalProps = {
   pin: Pin;
   isOpen: Boolean;

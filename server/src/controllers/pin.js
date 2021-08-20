@@ -21,15 +21,9 @@ const list = async (req, res, next) => {
 };
 
 const create = async (req, res, next) => {
-  const { lng, lat, title } = req.body;
-
+  const pinInfo = req.body;
   try {
-    const pin = await PinService.create({
-      lng: lng,
-      lat: lat,
-      title: title,
-    });
-
+    const pin = await PinService.create(pinInfo);
     return res.send(toPinDTO(pin));
   } catch (err) {
     return next(err);
