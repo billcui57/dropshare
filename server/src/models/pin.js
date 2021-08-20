@@ -21,6 +21,23 @@ const PinSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    description: {
+      type: String,
+      required: true,
+    },
+    remainingCount: {
+      type: Number,
+      required: false,
+    },
+    category: {
+      type: String,
+      enum: ["Food"],
+      required: true,
+    },
+    subcategory: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

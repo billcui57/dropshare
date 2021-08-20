@@ -2,10 +2,12 @@ import { PinDropMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
 import { setCurr, setJustDropped, setSelected } from "src/redux/store/pin";
-import DropPinForm from "@/components/DropPinForm";
+import DropPinForm from "@/components/Input/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
-import Button from "@/components/Button";
+import Button from "@/components/Input/Button";
+import SplitPane from "@/components/Layouts/SplitPane";
+import React from "react";
 
 type DropContainerProps = {
   currPin: Pin;
@@ -36,17 +38,17 @@ const DropContainer = (props: DropContainerProps) => {
   };
 
   return (
-    <div className={"flex justify-between h-full"}>
-      <div className={"w-1/2"}>
-        <Button type="secondary" onClick={() => router.push("/browse")}>
-          Go Back
-        </Button>
-        {renderDropPinForm()}
-      </div>
-      <div className={"w-1/2"}>
-        <PinDropMap setCurr={props.setCurr} currPin={props.currPin} />
-      </div>
-    </div>
+    <SplitPane
+      Left={
+        <React.Fragment>
+          <Button type="secondary" onClick={() => router.push("/browse")}>
+            Go Back
+          </Button>
+          <div className="text-center">{renderDropPinForm()}</div>
+        </React.Fragment>
+      }
+      Right={<PinDropMap setCurr={props.setCurr} currPin={props.currPin} />}
+    />
   );
 };
 
