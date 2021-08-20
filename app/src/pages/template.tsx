@@ -12,8 +12,8 @@ const PageHOC =
   () => {
     return (
       <div className={"flex flex-col h-screen"}>
-        <Navigation title={title}></Navigation>
-        <Component></Component>
+        <Navigation title={title} className="m-4" />
+        <Component />
         <h1>hi</h1>
       </div>
     );

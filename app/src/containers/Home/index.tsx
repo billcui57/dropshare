@@ -23,7 +23,7 @@ const HomeContainer = () => {
           delimiter=" "
         />
         <Typography
-          text="A new and modern way to solve food waste"
+          text="A decentralized charity platform"
           className="mb-8"
           colour="text"
         />

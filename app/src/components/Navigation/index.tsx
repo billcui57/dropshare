@@ -7,19 +7,20 @@ import { BLUE } from "@/constants/colours";
 
 type NavigationProps = {
   title: string;
+  className: string;
 };
 
-const Navigation = ({ title }: NavigationProps) => {
+const Navigation = (props: NavigationProps) => {
   const handleLoginClick = () => {
     router.push("/browse");
   };
 
   return (
-    <div className="flex justify-between m-4 items-center">
+    <div className={`flex justify-between items-center ${props.className}`}>
       <Link href="/">
         <a className={`text-${BLUE} font-bold`}>dropshare.io</a>
       </Link>
-      <StyledText text={title} delimiter=" " size="title" />
+      <StyledText text={props.title} delimiter=" " size="title" />
       <div className="flex space-x-4">
         <Button type="secondary">Sign Up</Button>
         <Button type="primary" onClick={handleLoginClick}>

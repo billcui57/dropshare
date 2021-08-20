@@ -29,7 +29,7 @@ const BrowseContainer = (props: BrowseContainerProps) => {
 
   return (
     <div className={"flex justify-between h-full"}>
-      <div className={"w-1/2"}>
+      <div className={"w-1/2 px-4"}>
         {props.selectedPin && <PinDetails pin={props.selectedPin} />}
       </div>
       <div className={"w-1/2"}>
