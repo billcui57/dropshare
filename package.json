@@ -2,7 +2,6 @@
   "name": "server",
   "version": "1.0.0",
   "description": "dropshare server",
-  "type": "module",
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
