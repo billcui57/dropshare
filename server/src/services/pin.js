@@ -1,15 +1,26 @@
 import { PinModel } from "@/models";
+import { PinValidator } from "@/validators";
 
 const list = async () => {
   return await PinModel.find({ deleted: false }).lean();
 };
 
-const create = async ({ lng, lat, title }) => {
+const create = async (pinInfo) => {
+  const { error } = PinValidator.validate(pinInfo);
+
+  if (error) {
+    throw new Error(error);
+  }
+
   return await PinModel.create({
-    title: title,
+    title: pinInfo.title,
+    description: pinInfo.description,
+    remainingCount: pinInfo.remainingCount,
+    category: pinInfo.category,
+    subcategory: pinInfo.subcategory,
     location: {
       type: "Point",
-      coordinates: [lng, lat],
+      coordinates: [pinInfo.lng, pinInfo.lat],
     },
   });
 };
