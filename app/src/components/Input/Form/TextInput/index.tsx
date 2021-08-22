@@ -5,7 +5,9 @@ type TextInputProps = {
   onChange: any;
   type: string;
   className?: string;
-  value: string;
+  value: string | number;
+  error?: string;
+  disabled?: boolean;
 };
 
 const TextInput = (props: TextInputProps) => {
@@ -17,6 +19,9 @@ const TextInput = (props: TextInputProps) => {
         onChange={props.onChange}
         type={props.type}
         variant="filled"
+        error={!!props.error}
+        helperText={props.error}
+        disabled={props.disabled}
       />
     </div>
   );

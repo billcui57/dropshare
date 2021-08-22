@@ -1,6 +1,6 @@
 export const CATEGORIES = ["Food"] as const;
 
-export const FOOD_SUBCATEGORIES = [
+const FOOD_SUBCATEGORIES = [
   "Vegetables",
   "Fruits",
   "Grains, legumes, nuts, and seeds",
@@ -8,4 +8,6 @@ export const FOOD_SUBCATEGORIES = [
   "Fish and seafood",
   "Dairy foods",
   "Eggs",
-] as const;
+];
+
+export const SUBCATEGORIES = [...FOOD_SUBCATEGORIES] as const;

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
 import Button from "@/components/Input/Button";
-import { FOOD_SUBCATEGORIES, CATEGORIES } from "@/constants/pin";
+import { SUBCATEGORIES, CATEGORIES } from "@/constants/pin";
 import SelectInput from "@/components/Input/Form/SelectInput";
 import TextInput from "@/components/Input/Form/TextInput";
+import _ from "lodash";
 
 type DropPinFormProps = {
   pin: Pin;
@@ -12,14 +13,46 @@ type DropPinFormProps = {
 
 const DropPinForm = (props: DropPinFormProps) => {
   const [pinInfo, setPinInfo] = useState<Pin>(props.pin);
+  const [error, setError] = useState({});
 
   const handleChange = (e: any, type: string) => {
+    setError({});
     setPinInfo({ ...pinInfo, [type]: e.target.value });
+  };
+
+  const getFormErrors = (pinInfo: Pin) => {
+    let newError = {};
+    if (!pinInfo.title || pinInfo.title.length < 3) {
+      newError = { ...newError, title: "Too short" };
+    }
+    if (!pinInfo.title || pinInfo.title.length > 100) {
+      newError = { ...newError, title: "Too long" };
+    }
+    if (!pinInfo.description || pinInfo.description.length < 3) {
+      newError = { ...newError, description: "Too short" };
+    }
+    if (!pinInfo.description || pinInfo.description.length > 500) {
+      newError = { ...newError, description: "Too long" };
+    }
+    if (!pinInfo.remainingCount || pinInfo.remainingCount < 0) {
+      newError = {
+        ...newError,
+        remainingCount: "Must be at least 0",
+      };
+    }
+    return newError;
   };
 
   const handlePinSubmit = () => {
     //pass validation
-    props.handleDropPin(pinInfo);
+
+    const newErrors = getFormErrors(pinInfo);
+
+    if (_.isEmpty(newErrors)) {
+      props.handleDropPin(pinInfo);
+    } else {
+      setError(newErrors);
+    }
   };
 
   return (
@@ -32,6 +65,7 @@ const DropPinForm = (props: DropPinFormProps) => {
         }}
         type="text"
         className="my-4"
+        error={error.title}
       />
       <TextInput
         label="Description"
@@ -41,6 +75,7 @@ const DropPinForm = (props: DropPinFormProps) => {
         }}
         type="text"
         className="my-4"
+        error={error.description}
       />
       <TextInput
         label="Remaining Count"
@@ -50,6 +85,7 @@ const DropPinForm = (props: DropPinFormProps) => {
         }}
         type="number"
         className="my-4"
+        error={error.remainingCount}
       />
       <SelectInput
         value={pinInfo?.category}
@@ -67,7 +103,7 @@ const DropPinForm = (props: DropPinFormProps) => {
       />
       <SelectInput
         value={pinInfo?.subcategory}
-        options={FOOD_SUBCATEGORIES.map((subcat) => {
+        options={SUBCATEGORIES.map((subcat) => {
           return {
             value: subcat,
             label: subcat,
