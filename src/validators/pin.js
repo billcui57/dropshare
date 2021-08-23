@@ -1,10 +1,12 @@
 import Joi from "joi";
-import { CATEGORIES, SUBCATEGORIES } from "@/constants/pin";
-
-const TITLE_MIN_LENGTH = 3;
-const TITLE_MAX_LENGTH = 100;
-const DESCRIPTION_MIN_LENGTH = 3;
-const DESCRIPTION_MAX_LENGTH = 500;
+import {
+  CATEGORIES,
+  SUBCATEGORIES,
+  TITLE_MIN_LENGTH,
+  TITLE_MAX_LENGTH,
+  DESCRIPTION_MIN_LENGTH,
+  DESCRIPTION_MAX_LENGTH,
+} from "@/constants/pin";
 
 const validationSchema = Joi.object({
   title: Joi.string().min(TITLE_MIN_LENGTH).max(TITLE_MAX_LENGTH).required(),
