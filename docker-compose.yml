@@ -1,0 +1,57 @@
+version: "3.9"
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: dropshare-server
+    container_name: dropshare-node-server
+    command: yarn dev
+    volumes:
+      - ./server/:/usr/app
+      - /usr/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    env_file: ./server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+  mongo:
+    image: mongo:4.0
+    container_name: dropshare-mongo
+    volumes:
+      - ~/dropshare-mongo-4.0:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    image: dropshare-app
+    container_name: dropshare-react-app
+    command: yarn dev
+    volumes:
+      - ./app/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  data-volume:
+  node_modules:
+  web-root:
+    driver: local
