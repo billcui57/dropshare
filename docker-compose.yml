@@ -24,7 +24,7 @@ services:
     image: mongo:4.0
     container_name: dropshare-mongo
     volumes:
-      - ~/dropshare-mongo-4.0:/data/db
+      - ~/Volumes/dropshare-mongo-4.0:/data/db
     ports:
       - "27017:27017"
     networks:
