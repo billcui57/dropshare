@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Pin } from "src/types/pin";
 import Typography from "@/components/Typography";
 import DeletePinModal from "@/components/Modals/DeletePinModal";
-import Button from "@/components/Button";
+import Button from "@/components/Input/Button";
 import StyledText from "@/components/StyledText";
 import { SECTION_HEAD } from "@/constants/sizes";
 import ButtonContainer from "@/components/ButtonContainer";

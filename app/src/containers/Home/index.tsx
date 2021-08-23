@@ -1,5 +1,5 @@
-import Button from "@/components/Button";
-import ButtonContainer from "@/components/ButtonContainer";
+import Button from "@/components/Input/Button";
+import ButtonContainer from "@/components/Input/ButtonContainer";
 import StyledText from "@/components/StyledText";
 import Typography from "@/components/Typography";
 import React from "react";
