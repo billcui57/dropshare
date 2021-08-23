@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
 import Button from "@/components/Input/Button";
-import { SUBCATEGORIES, CATEGORIES } from "@/constants/pin";
+import {
+  SUBCATEGORIES,
+  CATEGORIES,
+  TITLE_MIN_LENGTH,
+  DESCRIPTION_MAX_LENGTH,
+  DESCRIPTION_MIN_LENGTH,
+  TITLE_MAX_LENGTH,
+} from "@/constants/pin";
 import SelectInput from "@/components/Input/Form/SelectInput";
 import TextInput from "@/components/Input/Form/TextInput";
 import _ from "lodash";
@@ -22,16 +29,22 @@ const DropPinForm = (props: DropPinFormProps) => {
 
   const getFormErrors = (pinInfo: Pin) => {
     let newError = {};
-    if (!pinInfo.title || pinInfo.title.length < 3) {
+    if (!pinInfo.title || pinInfo.title.length < TITLE_MIN_LENGTH) {
       newError = { ...newError, title: "Too short" };
     }
-    if (!pinInfo.title || pinInfo.title.length > 100) {
+    if (!pinInfo.title || pinInfo.title.length > TITLE_MAX_LENGTH) {
       newError = { ...newError, title: "Too long" };
     }
-    if (!pinInfo.description || pinInfo.description.length < 3) {
+    if (
+      !pinInfo.description ||
+      pinInfo.description.length < DESCRIPTION_MIN_LENGTH
+    ) {
       newError = { ...newError, description: "Too short" };
     }
-    if (!pinInfo.description || pinInfo.description.length > 500) {
+    if (
+      !pinInfo.description ||
+      pinInfo.description.length > DESCRIPTION_MAX_LENGTH
+    ) {
       newError = { ...newError, description: "Too long" };
     }
     if (!pinInfo.remainingCount || pinInfo.remainingCount < 0) {
