@@ -5,6 +5,7 @@ import DeletePinModal from "@/components/Modals/DeletePinModal";
 import Button from "@/components/Input/Button";
 import StyledText from "@/components/StyledText";
 import { SECTION_HEAD } from "@/constants/sizes";
+import ButtonContainer from "@/components/Input/ButtonContainer";
 
 type PinDetailsProps = {
   pin: Pin;
@@ -27,14 +28,26 @@ const PinDetails = (props: PinDetailsProps) => {
         />
       </div>
       <div>
-        <Button
-          type="warning"
-          onClick={() => {
-            setIsDeleteModalOpen(true);
-          }}
-        >
-          Remove Pin
-        </Button>
+        <div className="flex justify-center mt-4">
+          <ButtonContainer>
+            <Button
+              type="primary"
+              onClick={() => {
+                setIsDeleteModalOpen(true);
+              }}
+            >
+              Edit Pin
+            </Button>
+            <Button
+              type="secondary"
+              onClick={() => {
+                setIsDeleteModalOpen(true);
+              }}
+            >
+              Remove Pin
+            </Button>
+          </ButtonContainer>
+        </div>
       </div>
       <DeletePinModal
         pin={props.pin}
