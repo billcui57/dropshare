@@ -32,21 +32,20 @@ const DropContainer = (props: DropContainerProps) => {
 
   const renderDropPinForm = () => {
     if (props.currPin) {
-      return <DropPinForm pin={props.currPin} handleDropPin={handleDropPin} />;
+      return (
+        <DropPinForm
+          pin={props.currPin}
+          handleDropPin={handleDropPin}
+          handleCancel={() => router.push("/browse")}
+        />
+      );
     }
     return <h1>Drop a pin down first</h1>;
   };
 
   return (
     <SplitPane
-      Left={
-        <React.Fragment>
-          <Button type="secondary" onClick={() => router.push("/browse")}>
-            Go Back
-          </Button>
-          <div className="text-center">{renderDropPinForm()}</div>
-        </React.Fragment>
-      }
+      Left={<div className="text-center">{renderDropPinForm()}</div>}
       Right={<PinDropMap setCurr={props.setCurr} currPin={props.currPin} />}
     />
   );

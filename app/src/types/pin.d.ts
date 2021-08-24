@@ -9,4 +9,5 @@ export type Pin = {
   remainingCount: number;
   category: typeof CATEGORIES[number];
   subcategory: typeof FOOD_SUBCATEGORIES[number];
+  image: string; //base64
 };
