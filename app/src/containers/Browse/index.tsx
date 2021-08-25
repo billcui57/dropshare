@@ -3,7 +3,7 @@ import { BrowseMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
 import { setCurr, setLoaded, setSelected } from "src/redux/store/pin";
-
+import SplitPane from "@/components/Layouts/SplitPane";
 import { useEffect } from "react";
 import { PinService } from "@/services";
 import PinDetails from "@/components/PinDetails";
@@ -28,11 +28,9 @@ const BrowseContainer = (props: BrowseContainerProps) => {
   }, []);
 
   return (
-    <div className={"flex justify-between h-full"}>
-      <div className={"w-1/2"}>
-        {props.selectedPin && <PinDetails pin={props.selectedPin} />}
-      </div>
-      <div className={"w-1/2"}>
+    <SplitPane
+      Left={props.selectedPin && <PinDetails pin={props.selectedPin} />}
+      Right={
         <BrowseMap
           loadedPins={props.loadedPins}
           setCurr={props.setCurr}
@@ -41,8 +39,8 @@ const BrowseContainer = (props: BrowseContainerProps) => {
           selectedPin={props.selectedPin}
           setSelectedPin={props.setSelected}
         />
-      </div>
-    </div>
+      }
+    />
   );
 };
 

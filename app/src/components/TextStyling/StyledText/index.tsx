@@ -16,7 +16,6 @@ type StyledTextProps = {
   text: string;
   size: string;
   className?: string;
-  delimiter: string;
 };
 
 const StyledText = (props: StyledTextProps) => {
@@ -33,7 +32,7 @@ const StyledText = (props: StyledTextProps) => {
     return null;
   }
 
-  const words: String[] = props.text.split(props.delimiter);
+  const words: String[] = props.text.split(" ");
 
   let display;
 
@@ -42,10 +41,10 @@ const StyledText = (props: StyledTextProps) => {
   } else {
     display = (
       <React.Fragment>
-        <div className={`text-${BLUE} mr-2`}>
-          {words.slice(0, words.length - 1).join(" ")}
+        <div className={`text-${BLUE} mr-2`}>{words[0].concat([" "])}</div>
+        <div className={`text-${RED}`}>
+          {words.slice(1, words.length).join(" ")}
         </div>
-        <div className={`text-${RED}`}>{words[words.length - 1]}</div>
       </React.Fragment>
     );
   }

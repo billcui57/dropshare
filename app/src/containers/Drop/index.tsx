@@ -5,7 +5,6 @@ import { setCurr, setJustDropped, setSelected } from "src/redux/store/pin";
 import DropPinForm from "@/components/Input/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
-import Button from "@/components/Input/Button";
 import SplitPane from "@/components/Layouts/SplitPane";
 import React from "react";
 
