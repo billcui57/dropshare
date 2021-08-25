@@ -44,6 +44,7 @@ const SelectInput = (props: SelectInputProps) => {
         disabled={props.disabled}
         className={`${classes.formControl} `}
         variant="filled"
+        fullWidth
       >
         <InputLabel>{props.label}</InputLabel>
         <Select value={props.value} onChange={props.onChange}>

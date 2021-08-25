@@ -3,8 +3,7 @@ import { PinService } from "@/services";
 
 const toPinDTO = (pin) => {
   return {
-    _id: pin._id,
-    title: pin.title,
+    ...pin,
     lng: pin.location.coordinates[0],
     lat: pin.location.coordinates[1],
   };

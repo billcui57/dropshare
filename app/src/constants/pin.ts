@@ -15,4 +15,4 @@ export const SUBCATEGORIES = [...FOOD_SUBCATEGORIES] as const;
 export const TITLE_MIN_LENGTH = 3;
 export const TITLE_MAX_LENGTH = 100;
 export const DESCRIPTION_MIN_LENGTH = 3;
-export const DESCRIPTION_MAX_LENGTH = 500;
+export const DESCRIPTION_MAX_LENGTH = 1000;

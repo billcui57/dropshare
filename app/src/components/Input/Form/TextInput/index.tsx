@@ -8,6 +8,7 @@ type TextInputProps = {
   value: string | number;
   error?: string;
   disabled?: boolean;
+  isTextArea?: boolean;
 };
 
 const TextInput = (props: TextInputProps) => {
@@ -22,6 +23,9 @@ const TextInput = (props: TextInputProps) => {
         error={!!props.error}
         helperText={props.error}
         disabled={props.disabled}
+        fullWidth
+        multiline={props.isTextArea}
+        rows={props.isTextArea ? 10 : undefined}
       />
     </div>
   );

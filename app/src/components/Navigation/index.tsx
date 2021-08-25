@@ -1,7 +1,7 @@
 import Button from "@/components/Input/Button";
 import React from "react";
 import Link from "next/link";
-import StyledText from "@/components/StyledText";
+import StyledText from "@/components/TextStyling/StyledText";
 import router, { useRouter } from "next/router";
 import { BLUE } from "@/constants/colours";
 
