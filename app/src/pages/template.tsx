@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 
 type PageHOCProps = {
   Component: FunctionComponent;
-  title?: String;
+  title: string;
 };
 
 const PageHOC =

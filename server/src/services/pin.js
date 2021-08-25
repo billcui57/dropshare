@@ -12,7 +12,7 @@ const create = async (pinInfo) => {
     throw new Error(error);
   }
 
-  return await PinModel.create({
+  const createdPin = await PinModel.create({
     title: pinInfo.title,
     description: pinInfo.description,
     remainingCount: pinInfo.remainingCount,
@@ -24,6 +24,8 @@ const create = async (pinInfo) => {
     },
     image: pinInfo.image,
   });
+
+  return createdPin.toObject();
 };
 
 const remove = async (pinId) => {

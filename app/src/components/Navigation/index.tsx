@@ -20,7 +20,7 @@ const Navigation = (props: NavigationProps) => {
       <Link href="/">
         <a className={`text-${BLUE} font-bold`}>dropshare.io</a>
       </Link>
-      <StyledText text={props.title} delimiter=" " size="title" />
+      <StyledText text={props.title} size="title" />
       <div className="flex space-x-4">
         <Button type="secondary">Sign Up</Button>
         <Button type="primary" onClick={handleLoginClick}>
