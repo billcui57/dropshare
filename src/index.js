@@ -8,7 +8,7 @@ import "./config/mongodb.config";
 const app = express();
 const PORT = 5000;
 
-app.use(express.json());
+app.use(express.json({ limit: "10MB" }));
 app.use(cors());
 
 app.use("/api/v1", Routes.initPrivateRoutes());
