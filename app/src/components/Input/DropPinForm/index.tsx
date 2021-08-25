@@ -12,10 +12,13 @@ import {
 import SelectInput from "@/components/Input/Form/SelectInput";
 import TextInput from "@/components/Input/Form/TextInput";
 import _ from "lodash";
+import FileUploadButton from "@/components/Input/FileUploadButton";
+import ButtonContainer from "@/components/Input/ButtonContainer";
 
 type DropPinFormProps = {
   pin: Pin;
   handleDropPin: Function;
+  handleCancel: Function;
 };
 
 const DropPinForm = (props: DropPinFormProps) => {
@@ -24,7 +27,19 @@ const DropPinForm = (props: DropPinFormProps) => {
 
   const handleChange = (e: any, type: string) => {
     setError({});
-    setPinInfo({ ...pinInfo, [type]: e.target.value });
+
+    if (type === "image") {
+      handleImageChange(e);
+    } else {
+      setPinInfo({ ...pinInfo, [type]: e.target.value });
+    }
+  };
+
+  const handleImageChange = (fileUploaded) => {
+    setPinInfo({
+      ...pinInfo,
+      image: fileUploaded,
+    });
   };
 
   const getFormErrors = (pinInfo: Pin) => {
@@ -68,72 +83,92 @@ const DropPinForm = (props: DropPinFormProps) => {
     }
   };
 
+  const renderImageUploader = () => {
+    return (
+      <div className="col-span-2 flex flex-wrap justify-center items-center  ">
+        {pinInfo.image && <img src={pinInfo.image} className="mx-4 mb-4" />}
+        <FileUploadButton
+          type="secondary"
+          onSubmit={(e) => {
+            handleChange(e, "image");
+          }}
+        >
+          {pinInfo.image ? "Change the image" : "Attach an image"}
+        </FileUploadButton>
+      </div>
+    );
+  };
+
   return (
-    <React.Fragment>
-      <TextInput
-        label="Title"
-        value={pinInfo?.title}
-        onChange={(e) => {
-          handleChange(e, "title");
-        }}
-        type="text"
-        className="my-4"
-        error={error.title}
-      />
-      <TextInput
-        label="Description"
-        value={pinInfo?.description}
-        onChange={(e) => {
-          handleChange(e, "description");
-        }}
-        type="text"
-        className="my-4"
-        error={error.description}
-      />
-      <TextInput
-        label="Remaining Count"
-        value={pinInfo?.remainingCount}
-        onChange={(e) => {
-          handleChange(e, "remainingCount");
-        }}
-        type="number"
-        className="my-4"
-        error={error.remainingCount}
-      />
-      <SelectInput
-        value={pinInfo?.category}
-        options={CATEGORIES.map((subcat) => {
-          return {
-            value: subcat,
-            label: subcat,
-          };
-        })}
-        onChange={(e) => {
-          handleChange(e, "category");
-        }}
-        label="Category"
-        className="my-4"
-      />
-      <SelectInput
-        value={pinInfo?.subcategory}
-        options={SUBCATEGORIES.map((subcat) => {
-          return {
-            value: subcat,
-            label: subcat,
-          };
-        })}
-        onChange={(e) => {
-          handleChange(e, "subcategory");
-        }}
-        label="Subcategory"
-        className="my-4"
-      />
-      <div className="my-4">
+    <div>
+      <div className="grid grid-cols-2 gap-4 justify-center items-center mb-4">
+        <TextInput
+          label="Title"
+          value={pinInfo?.title}
+          onChange={(e) => {
+            handleChange(e, "title");
+          }}
+          type="text"
+          error={error.title}
+        />
+        <TextInput
+          label="Remaining Count"
+          value={pinInfo?.remainingCount}
+          onChange={(e) => {
+            handleChange(e, "remainingCount");
+          }}
+          type="number"
+          error={error.remainingCount}
+        />
+        <TextInput
+          label="Description"
+          className="col-span-2"
+          value={pinInfo?.description}
+          onChange={(e) => {
+            handleChange(e, "description");
+          }}
+          type="text"
+          error={error.description}
+          isTextArea
+        />
+        <SelectInput
+          value={pinInfo?.category}
+          options={CATEGORIES.map((subcat) => {
+            return {
+              value: subcat,
+              label: subcat,
+            };
+          })}
+          onChange={(e) => {
+            handleChange(e, "category");
+          }}
+          label="Category"
+        />
+        <SelectInput
+          value={pinInfo?.subcategory}
+          options={SUBCATEGORIES.map((subcat) => {
+            return {
+              value: subcat,
+              label: subcat,
+            };
+          })}
+          onChange={(e) => {
+            handleChange(e, "subcategory");
+          }}
+          label="Subcategory"
+        />
+        {renderImageUploader()}
+      </div>
+
+      <ButtonContainer className="flex justify-center">
         <Button type="primary" onClick={handlePinSubmit}>
           Submit
         </Button>
-      </div>
-    </React.Fragment>
+        <Button type="secondary" onClick={props.handleCancel}>
+          Cancel
+        </Button>
+      </ButtonContainer>
+    </div>
   );
 };
 
