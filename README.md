@@ -32,7 +32,7 @@ Then you can check the status of the containers by running:
 
 The App should be App :
 
-visit client : http://localhost:3000
+visit client : http://localhost:80
 
 visit server : http://localhost:8080
 
