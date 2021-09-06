@@ -1,3 +1,5 @@
 .vscode
 .env
 dropshare.pem
+
+docker-compose.yml
