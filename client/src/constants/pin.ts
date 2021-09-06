@@ -1,4 +1,4 @@
-export const CATEGORIES = ["Food"];
+export const CATEGORIES = ["Food"] as const;
 
 const FOOD_SUBCATEGORIES = [
   "Vegetables",
@@ -10,7 +10,7 @@ const FOOD_SUBCATEGORIES = [
   "Eggs",
 ];
 
-export const SUBCATEGORIES = [...FOOD_SUBCATEGORIES];
+export const SUBCATEGORIES = [...FOOD_SUBCATEGORIES] as const;
 
 export const TITLE_MIN_LENGTH = 3;
 export const TITLE_MAX_LENGTH = 100;

@@ -28,5 +28,9 @@
     "@/services": "./src/services",
     "@/constants": "./src/constants",
     "@/validators": "./src/validators"
+  },
+  "engines": {
+    "node": "14.17.5",
+    "npm": "6.14.14"
   }
 }

@@ -22,6 +22,7 @@ const create = async (pinInfo) => {
       type: "Point",
       coordinates: [pinInfo.lng, pinInfo.lat],
     },
+    image: pinInfo.image,
   });
 };
 

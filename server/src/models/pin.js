@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { CATEGORIES } from "@/constants/pin";
 
 const PinSchema = new mongoose.Schema(
   {
@@ -31,12 +32,16 @@ const PinSchema = new mongoose.Schema(
     },
     category: {
       type: String,
-      enum: ["Food"],
+      enum: [...CATEGORIES],
       required: true,
     },
     subcategory: {
       type: String,
       required: true,
+    },
+    image: {
+      type: String, //base 64
+      required: false,
     },
   },
   { timestamps: true }
