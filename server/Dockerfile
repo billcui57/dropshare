@@ -5,7 +5,7 @@ FROM node:14.17.5-alpine
 ARG NODE_ENV=development
 
 # Create App Directory
-WORKDIR /usr/app
+WORKDIR /usr/src/app
 
 # Install Dependencies
 COPY package*.json ./

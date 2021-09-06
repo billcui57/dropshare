@@ -18,7 +18,7 @@ const HomeContainer = () => {
         <StyledText text="Less wasting," size="display" />
         <StyledText text="more caring" size="display" className="mb-4" />
         <Typography
-          text="A new and modern way to solve food waste"
+          text="A decentralized charity platform"
           className="mb-8"
           colour="text"
           size="base"
