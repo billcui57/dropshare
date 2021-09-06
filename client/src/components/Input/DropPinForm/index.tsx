@@ -23,7 +23,7 @@ type DropPinFormProps = {
 
 const DropPinForm = (props: DropPinFormProps) => {
   const [pinInfo, setPinInfo] = useState<Pin>(props.pin);
-  const [error, setError] = useState({});
+  const [error, setError] = useState<any>({});
 
   const handleChange = (e: any, type: string) => {
     setError({});
