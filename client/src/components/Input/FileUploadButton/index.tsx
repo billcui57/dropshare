@@ -11,10 +11,12 @@ type FileUploadButtonProps = {
 };
 
 const FileUploadButton = (props: FileUploadButtonProps) => {
-  const hiddenFileInput = useRef(null);
+  const hiddenFileInput = useRef<any>(null);
 
-  const handleClick = (event) => {
-    hiddenFileInput.current.click();
+  const handleClick = () => {
+    if (hiddenFileInput.current) {
+      hiddenFileInput.current.click();
+    }
   };
 
   const handleChange = async (event) => {

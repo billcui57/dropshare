@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import ButtonContainer from "@/components/Input/ButtonContainer";
 type DeletePinModalProps = {
   pin: Pin;
-  isOpen: Boolean;
+  isOpen: boolean;
   handleClose: Function;
   remove: Function;
 };
