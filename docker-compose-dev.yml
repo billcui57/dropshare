@@ -45,10 +45,10 @@ services:
     depends_on:
       - server
     ports:
-      - "80:80"
+      - "443:443"
     networks:
       - app-network
-    expose: [80]
+    expose: [443]
 
 networks:
   app-network:
