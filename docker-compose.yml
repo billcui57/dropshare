@@ -13,12 +13,11 @@ services:
       - ./server/:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "80:80"
+      - "5000:5000"
     depends_on:
       - mongo
-    env_file: ./server/.env
     environment:
-      - NODE_ENV=production
+      - NODE_ENV=development
     networks:
       - app-network
   mongo:
@@ -29,6 +28,23 @@ services:
       - ~/Volumes/dropshare-mongo-4.0:/data/db
     ports:
       - "27017:27017"
+    networks:
+      - app-network
+  client:
+    restart: always
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: dropshare-client
+    container_name: dropshare-react-client
+    command: yarn dev
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "80:80"
     networks:
       - app-network
 
