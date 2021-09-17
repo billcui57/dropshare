@@ -26,5 +26,5 @@ coverage
 # Benchmarking
 benchmarks/graphs
 
-.env.dev
-.env.prod
+.env.development
+.env.production
