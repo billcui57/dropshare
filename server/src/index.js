@@ -6,7 +6,7 @@ import cors from "cors";
 import "./config/mongodb.config";
 
 const app = express();
-const PORT = process.env.SERVER_PORT;
+const PORT = 5000;
 
 app.use(express.json({ limit: "10MB" }));
 app.use(cors());
