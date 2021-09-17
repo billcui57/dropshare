@@ -1,9 +1,8 @@
-#  Dockerfile for Node Express Backend api (production)
-#  Not for monolithic backend - netify frontend, ec2 backend
+#  Dockerfile for Node Express Backend api (development)
 
 FROM node:14.17.5-alpine
 
-ARG NODE_ENV=production
+ARG NODE_ENV=development
 
 # Create App Directory
 WORKDIR /usr/src/app
@@ -17,5 +16,5 @@ RUN yarn
 COPY . .
 
 # Exports
-EXPOSE 80
+EXPOSE 5000
 
