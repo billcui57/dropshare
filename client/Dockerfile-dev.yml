@@ -14,5 +14,5 @@ RUN yarn
 # copy local files to app folder
 COPY . .
 
-EXPOSE 80
+
 

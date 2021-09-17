@@ -20,6 +20,7 @@ services:
       - NODE_ENV=development
     networks:
       - app-network
+    expose: [5000]
   mongo:
     restart: always
     image: mongo:4.0
@@ -47,6 +48,7 @@ services:
       - "80:80"
     networks:
       - app-network
+    expose: [80]
 
 networks:
   app-network:
