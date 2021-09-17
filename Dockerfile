@@ -16,6 +16,5 @@ RUN yarn
 # Copy app source code
 COPY . .
 
-# Exports
-EXPOSE 80
+
 
