@@ -9,4 +9,6 @@ router.post("/", PinController.create);
 
 router.delete("/:id", PinController.remove);
 
+router.put("/:id", PinController.edit);
+
 export default router;

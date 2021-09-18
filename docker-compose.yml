@@ -2,6 +2,7 @@ version: "3.9"
 
 services:
   server:
+    restart: always
     build:
       context: ./server
       dockerfile: Dockerfile
@@ -15,12 +16,13 @@ services:
       - "5000:5000"
     depends_on:
       - mongo
-    env_file: ./server/.env
     environment:
       - NODE_ENV=development
     networks:
       - app-network
+    expose: [5000]
   mongo:
+    restart: always
     image: mongo:4.0
     container_name: dropshare-mongo
     volumes:
@@ -30,6 +32,7 @@ services:
     networks:
       - app-network
   client:
+    restart: always
     build:
       context: ./client
       dockerfile: Dockerfile
@@ -42,9 +45,10 @@ services:
     depends_on:
       - server
     ports:
-      - "3000:3000"
+      - "443:443"
     networks:
       - app-network
+    expose: [443]
 
 networks:
   app-network:

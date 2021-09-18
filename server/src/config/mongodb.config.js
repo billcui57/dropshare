@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-dotenv.config();
+dotenv.config({ path: `.env.${process.env.NODE_ENV}` });
 
 // mongoose options
 const options = {

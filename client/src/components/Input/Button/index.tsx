@@ -18,9 +18,16 @@ type ButtonProps = {
   children: any;
   onClick: any;
   className?: string;
+  hidden?: boolean;
 };
 
-const Button = ({ type, children, onClick, className }: ButtonProps) => {
+const Button = ({
+  type,
+  children,
+  onClick,
+  className,
+  hidden,
+}: ButtonProps) => {
   const btnClasses = classNames(
     `w-36 h-12 rounded-lg focus:outline-none ${className}`,
     {
@@ -33,7 +40,7 @@ const Button = ({ type, children, onClick, className }: ButtonProps) => {
   );
 
   return (
-    <button className={btnClasses} onClick={onClick}>
+    <button className={btnClasses} onClick={onClick} hidden={hidden}>
       {children}
     </button>
   );
