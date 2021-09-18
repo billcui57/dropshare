@@ -4,9 +4,12 @@ import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
 import { setCurr, setLoaded, setSelected } from "src/redux/store/pin";
 import SplitPane from "@/components/Layouts/SplitPane";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { PinService } from "@/services";
 import PinDetails from "@/components/PinDetails";
+import DeletePinModal from "@/components/Modals/DeletePinModal";
+import ButtonContainer from "@/components/Input/ButtonContainer";
+import { useRouter } from "next/router";
 
 type BrowseContainerProps = {
   currPin: Pin;
@@ -19,6 +22,9 @@ type BrowseContainerProps = {
 };
 
 const BrowseContainer = (props: BrowseContainerProps) => {
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const router = useRouter();
+
   useEffect(() => {
     PinService.list()
       .then((data) => {
@@ -29,7 +35,39 @@ const BrowseContainer = (props: BrowseContainerProps) => {
 
   return (
     <SplitPane
-      Left={props.selectedPin && <PinDetails pin={props.selectedPin} />}
+      Left={
+        props.selectedPin && (
+          <div>
+            <PinDetails pin={props.selectedPin} />
+            <ButtonContainer className="flex justify-center mt-4">
+              <Button
+                type="primary"
+                onClick={() => {
+                  router.push("/edit");
+                }}
+              >
+                Edit Pin
+              </Button>
+              <Button
+                type="secondary"
+                onClick={() => {
+                  setIsDeleteModalOpen(true);
+                }}
+              >
+                Remove Pin
+              </Button>
+            </ButtonContainer>
+
+            <DeletePinModal
+              pin={props.selectedPin}
+              isOpen={isDeleteModalOpen}
+              handleClose={() => {
+                setIsDeleteModalOpen(false);
+              }}
+            />
+          </div>
+        )
+      }
       Right={
         <BrowseMap
           loadedPins={props.loadedPins}
