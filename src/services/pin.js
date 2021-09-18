@@ -39,8 +39,35 @@ const remove = async (pinId) => {
   );
 };
 
+const edit = async (pinId, newPinInfo) => {
+  const oldPin = await PinModel.findById(pinId);
+
+  if (!oldPin) {
+    throw new Error("Pin not found");
+  }
+
+  const { error } = PinValidator.validate(newPinInfo);
+
+  if (error) {
+    throw new Error(error);
+  }
+
+  const newPin = oldPin;
+
+  newPin.title = newPinInfo.title;
+  newPin.description = newPinInfo.description;
+  newPin.remainingCount = newPinInfo.remainingCount;
+  newPin.category = newPinInfo.category;
+  newPin.subcategory = newPinInfo.subcategory;
+  newPin.image = newPinInfo.image;
+  await newPin.save();
+
+  return newPin.toObject();
+};
+
 export default {
   list,
   create,
   remove,
+  edit,
 };
