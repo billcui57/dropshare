@@ -57,7 +57,7 @@ const BrowseMap = (props: BrowseMapProps) => {
             lat={props.justDroppedPin.lat}
             lng={props.justDroppedPin.lng}
             key={props.justDroppedPin._id}
-            colour={"yellow"}
+            colour={"blue"}
             onClick={() => handlePinClick(props.justDroppedPin)}
           />
         );

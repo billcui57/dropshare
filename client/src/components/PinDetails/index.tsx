@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
-import DeletePinModal from "@/components/Modals/DeletePinModal";
-import Button from "@/components/Input/Button";
-import ButtonContainer from "@/components/Input/ButtonContainer";
 import DetailsText from "@/components/TextStyling/DetailsText";
 
 type PinDetailsProps = {
@@ -10,13 +7,9 @@ type PinDetailsProps = {
 };
 
 const PinDetails = (props: PinDetailsProps) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   if (!props.pin) {
     return null;
   }
-
-  const handleEditButtonClick = () => {};
 
   return (
     <div>
@@ -58,33 +51,6 @@ const PinDetails = (props: PinDetailsProps) => {
           <img src={props.pin.image} />
         </div>
       </div>
-
-      <ButtonContainer className="flex justify-center mt-4">
-        <Button
-          type="primary"
-          onClick={() => {
-            setIsDeleteModalOpen(true);
-          }}
-        >
-          Edit Pin
-        </Button>
-        <Button
-          type="secondary"
-          onClick={() => {
-            setIsDeleteModalOpen(true);
-          }}
-        >
-          Remove Pin
-        </Button>
-      </ButtonContainer>
-
-      <DeletePinModal
-        pin={props.pin}
-        isOpen={isDeleteModalOpen}
-        handleClose={() => {
-          setIsDeleteModalOpen(false);
-        }}
-      />
     </div>
   );
 };
