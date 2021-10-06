@@ -10,7 +10,6 @@ type BrowseMapProps = {
   currPin: Pin;
   loadedPins: Pin[];
   setCurr: Function;
-  justDroppedPin: Pin;
   selectedPin: Pin;
   setSelectedPin: Function;
 };
@@ -48,25 +47,7 @@ const BrowseMap = (props: BrowseMapProps) => {
     let pins: ReactElement[] = [];
 
     if (props.loadedPins) {
-      let remainingPins: Pin[] = props.loadedPins;
-
-      if (props.justDroppedPin) {
-        pins.push(
-          <PinView
-            title={props.justDroppedPin.title}
-            lat={props.justDroppedPin.lat}
-            lng={props.justDroppedPin.lng}
-            key={props.justDroppedPin._id}
-            colour={"blue"}
-            onClick={() => handlePinClick(props.justDroppedPin)}
-          />
-        );
-        remainingPins = remainingPins.filter(
-          (pin) => props.justDroppedPin._id !== pin._id
-        );
-      }
-
-      remainingPins.forEach((pin, i) => {
+      props.loadedPins.forEach((pin, i) => {
         pins.push(
           <PinView
             title={pin.title}
@@ -103,12 +84,6 @@ const BrowseMap = (props: BrowseMapProps) => {
       };
     }
 
-    if (props.justDroppedPin) {
-      return {
-        lat: props.justDroppedPin.lat,
-        lng: props.justDroppedPin.lng,
-      };
-    }
     return {
       lat: 43.662349271526836,
       lng: -79.37947646024934,

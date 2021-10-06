@@ -1,7 +1,7 @@
 import { PinDropMap } from "@/components/Map";
 import { connect } from "react-redux";
 import { Pin } from "src/types/pin";
-import { setCurr, setJustDropped, setSelected } from "src/redux/store/pin";
+import { setCurr, setSelected } from "src/redux/store/pin";
 import DropPinForm from "@/components/Input/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
@@ -11,7 +11,6 @@ import React from "react";
 type DropContainerProps = {
   currPin: Pin;
   setCurr: Function;
-  setJustDropped: Function;
   setSelected: Function;
 };
 
@@ -21,7 +20,6 @@ const DropContainer = (props: DropContainerProps) => {
   const handleDropPin = (pinInfo: Pin) => {
     PinService.post(pinInfo)
       .then((data) => {
-        props.setJustDropped(data);
         props.setSelected(data);
         props.setCurr(undefined);
         router.push("/browse");
@@ -59,7 +57,6 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = {
   setCurr: setCurr,
-  setJustDropped: setJustDropped,
   setSelected: setSelected,
 };
 

@@ -16,7 +16,6 @@ type BrowseContainerProps = {
   loadedPins: Pin[];
   setCurr: Function;
   setLoaded: Function;
-  justDroppedPin: Pin;
   selectedPin: Pin;
   setSelected: Function;
 };
@@ -73,7 +72,6 @@ const BrowseContainer = (props: BrowseContainerProps) => {
           loadedPins={props.loadedPins}
           setCurr={props.setCurr}
           currPin={props.currPin}
-          justDroppedPin={props.justDroppedPin}
           selectedPin={props.selectedPin}
           setSelectedPin={props.setSelected}
         />
@@ -86,7 +84,6 @@ const mapStateToProps = (state: any) => {
   return {
     currPin: state.pins.curr,
     loadedPins: state.pins.loaded,
-    justDroppedPin: state.pins.justDropped,
     selectedPin: state.pins.selected,
   };
 };
