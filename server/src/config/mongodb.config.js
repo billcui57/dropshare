@@ -15,21 +15,23 @@ const options = {
 };
 
 // mongodb environment variables
-const { MONGO_HOSTNAME, MONGO_DB, MONGO_PORT } = process.env;
+const { MONGO_HOSTNAME, MONGO_DB, MONGO_PORT, NODE_ENV, MONGO_URI } =
+  process.env;
 
-const dbConnectionURL = {
+const dbConnectionURIs = {
   LOCAL_DB_URL: `mongodb://${MONGO_HOSTNAME}:${MONGO_PORT}/${MONGO_DB}?authSource=admin`,
-  REMOTE_DB_URL: process.env.MONGODB_URI, //atlas url
+  REMOTE_DB_URL: process.env.MONGO_URI, //atlas url
 };
-mongoose.connect(dbConnectionURL.LOCAL_DB_URL, options);
+
+const URI =
+  NODE_ENV === "production"
+    ? dbConnectionURIs.REMOTE_DB_URL
+    : dbConnectionURIs.LOCAL_DB_URL;
+
+mongoose.connect(URI, options);
+
 const db = mongoose.connection;
-db.on(
-  "error",
-  console.error.bind(
-    console,
-    "Mongodb Connection Error:" + dbConnectionURL.LOCALURL
-  )
-);
+db.on("error", console.error.bind(console, "Mongodb Connection Error:" + URI));
 db.once("open", () => {
   // we're connected !
   console.log("Mongodb Connection Successful");
