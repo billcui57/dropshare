@@ -10,8 +10,6 @@ type BrowseMapProps = {
   currPin: Pin;
   loadedPins: Pin[];
   setCurr: Function;
-  selectedPin: Pin;
-  setSelectedPin: Function;
 };
 
 const BrowseMap = (props: BrowseMapProps) => {
@@ -29,18 +27,12 @@ const BrowseMap = (props: BrowseMapProps) => {
   };
 
   const handleMapClick = ({ x, y, lat, lng, event }) => {
-    if (props.setSelectedPin) {
-      props.setSelectedPin(undefined);
-    }
-
     props.setCurr({ lat: lat, lng: lng });
   };
 
-  const handlePinClick = (pin) => {
-    if (props.setSelectedPin) {
-      props.setCurr(undefined);
-      props.setSelectedPin(pin);
-    }
+  const handlePinClick = (pin: Pin) => {
+    props.setCurr(undefined);
+    router.push(`/browse/${pin._id}`);
   };
 
   const renderPins = () => {
