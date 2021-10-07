@@ -17,24 +17,25 @@ const currPinsSlice = createSlice({
     setLoaded(state, action) {
       state.loaded = action.payload;
     },
-    setSelected(state, action) {
-      state.selected = action.payload;
-    },
     remove(state, action) {
       const pinId = action.payload;
 
       state.loaded = state.loaded.filter((pin: Pin) => {
         return pin._id !== pinId;
       });
-
-      if (state.selected && state.selected._id === pinId) {
-        state.selected = undefined;
-      }
     },
   },
 });
 
-export const { setCurr, setLoaded, setSelected, remove } =
-  currPinsSlice.actions;
+export const getSelectorPinById = (pinId) => {
+  return (state) => {
+    const loaded: Pin[] = state.pins.loaded;
+    return loaded.find((pin) => {
+      return pin._id === pinId;
+    });
+  };
+};
+
+export const { setCurr, setLoaded, remove } = currPinsSlice.actions;
 
 export default currPinsSlice.reducer;
