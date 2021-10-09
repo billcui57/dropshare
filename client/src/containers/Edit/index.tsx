@@ -1,7 +1,7 @@
 import { PinDropMap } from "@/components/Map";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 import { Pin } from "src/types/pin";
-import { setCurr, setJustDropped, setSelected } from "src/redux/store/pin";
+import { getSelectorPinById, setCurr } from "@/store/pin";
 import DropPinForm from "@/components/Input/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
@@ -9,20 +9,20 @@ import SplitPane from "@/components/Layouts/SplitPane";
 import React from "react";
 
 type EditContainerProps = {
-  selectedPin: Pin;
+  selectedPinId: string;
   setCurr: Function;
-  setJustDropped: Function;
-  setSelected: Function;
 };
 
 const EditContainer = (props: EditContainerProps) => {
   const router = useRouter();
 
+  const selectedPin: Pin | undefined = useSelector(
+    getSelectorPinById(props.selectedPinId)
+  );
+
   const handleEditPin = (pinInfo: Pin) => {
-    PinService.edit(props.selectedPin._id, pinInfo)
+    PinService.edit(selectedPin, pinInfo)
       .then((data) => {
-        props.setJustDropped(data);
-        props.setSelected(data);
         props.setCurr(undefined);
         router.push("/browse");
       })
@@ -30,10 +30,10 @@ const EditContainer = (props: EditContainerProps) => {
   };
 
   const renderEditPinForm = () => {
-    if (props.selectedPin) {
+    if (selectedPin) {
       return (
         <DropPinForm
-          pin={props.selectedPin}
+          pin={selectedPin}
           handleDropPin={handleEditPin}
           handleCancel={() => router.push("/browse")}
         />
@@ -45,22 +45,19 @@ const EditContainer = (props: EditContainerProps) => {
   return (
     <SplitPane
       Left={<div className="text-center">{renderEditPinForm()}</div>}
-      Right={<PinDropMap setCurr={props.setCurr} currPin={props.selectedPin} />}
+      Right={<PinDropMap setCurr={props.setCurr} currPin={selectedPin} />}
     />
   );
 };
 
 const mapStateToProps = (state: any) => {
   return {
-    selectedPin: state.pins.selected,
     loadedPins: state.pins.loaded,
   };
 };
 
 const mapDispatchToProps = {
   setCurr: setCurr,
-  setJustDropped: setJustDropped,
-  setSelected: setSelected,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditContainer);
