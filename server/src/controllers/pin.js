@@ -42,6 +42,7 @@ const remove = async (req, res, next) => {
 const edit = async (req, res, next) => {
   const { id } = req.params;
   const newPinInfo = req.body;
+
   try {
     const newPin = await PinService.edit(id, newPinInfo);
     return res.send(toPinDTO(newPin));

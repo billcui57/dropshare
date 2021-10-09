@@ -9,8 +9,6 @@ const BrowsePage = () => {
 
   const pinId = router.query.id;
 
-  console.log(pinId);
-
   return <BrowseContainer selectedPinId={pinId} />;
 };
 export default PageHOC({ Component: BrowsePage, title: "Browse Around" });
