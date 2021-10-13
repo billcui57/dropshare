@@ -42,11 +42,11 @@ const BrowseMap = (props: BrowseMapProps) => {
       props.loadedPins.forEach((pin, i) => {
         pins.push(
           <PinView
+            remainingCount={pin.remainingCount}
             title={pin.title}
             lat={pin.lat}
             lng={pin.lng}
             key={pin._id}
-            colour="blue"
             onClick={() => handlePinClick(pin)}
           />
         );
@@ -56,11 +56,12 @@ const BrowseMap = (props: BrowseMapProps) => {
     if (props.currPin) {
       pins.push(
         <PinView
+          remainingCount={props.currPin.remainingCount}
           title={props.currPin.title}
           lat={props.currPin.lat}
           lng={props.currPin.lng}
           key={props.currPin._id}
-          colour="red"
+          isCurr
         />
       );
     }

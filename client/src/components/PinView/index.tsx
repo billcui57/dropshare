@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classNames from "classnames";
 import _ from "lodash";
-import { BLUE, YELLOW, RED, WHITE } from "@/constants/colours";
+import { BLUE, YELLOW, RED, WHITE, GREEN } from "@/constants/colours";
 import Typography from "@/components/TextStyling/Typography";
 
 const COLORS = {
@@ -12,8 +12,9 @@ const COLORS = {
 
 type PinViewProps = {
   hover?: Boolean;
-  colour: String;
+  isCurr?: Boolean;
   title: String;
+  remainingCount: Number;
   lat: Number;
   lng: Number;
   onClick?: Function;
@@ -21,10 +22,25 @@ type PinViewProps = {
 
 const PinView = (props: PinViewProps) => {
   const pinClasses = classNames(
-    `rounded-full transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center h-12 w-12 p-1 border-2 border-${WHITE}`,
+    `rounded-full
+    transform
+    -translate-x-1/2 
+    -translate-y-1/2
+    flex
+    items-center
+    justify-center
+    h-12
+    w-12
+    p-1
+    bg-gray-100
+    ring-4 
+    ring-opacity-75`,
     {
-      [`bg-${BLUE}`]: props.colour == COLORS.BLUE,
-      [`bg-${RED}`]: props.colour == COLORS.RED,
+      [`ring-${BLUE}`]: props.isCurr,
+      [`ring-${GREEN}`]: props.remainingCount >= 10,
+      [`ring-${YELLOW}`]:
+        props.remainingCount >= 5 && props.remainingCount < 10,
+      [`ring-${RED}`]: props.remainingCount >= 1 && props.remainingCount < 5,
     }
   );
 
@@ -38,7 +54,7 @@ const PinView = (props: PinViewProps) => {
 
   return (
     <div className={pinClasses} onClick={handleClick}>
-      <Typography text={props.title} colour="white" noWrap size="sm" />
+      <Typography text={props.title} colour="black" noWrap size="sm" />
     </div>
   );
 };
