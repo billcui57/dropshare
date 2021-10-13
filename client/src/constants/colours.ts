@@ -6,3 +6,4 @@ export const RED_DARKER = "red-600";
 export const YELLOW = "yellow-400";
 export const TEXT = "gray-600";
 export const WHITE = "white";
+export const GREEN = "green-500";

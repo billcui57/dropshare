@@ -20,11 +20,12 @@ const PinDropMap = (props: PinDropMapProps) => {
     if (props.currPin) {
       pins.push(
         <PinView
+          remainingCount={props.currPin.remainingCount}
           title={props.currPin.title}
           lat={props.currPin.lat}
           lng={props.currPin.lng}
           key={props.currPin._id}
-          colour="red"
+          isCurr
         />
       );
     }

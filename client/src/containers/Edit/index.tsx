@@ -21,7 +21,7 @@ const EditContainer = (props: EditContainerProps) => {
   );
 
   const handleEditPin = (pinInfo: Pin) => {
-    PinService.edit(selectedPin, pinInfo)
+    PinService.edit(selectedPin?._id, pinInfo)
       .then((data) => {
         props.setCurr(undefined);
         router.push("/browse");
