@@ -42,6 +42,7 @@ const DropContainer = (props: DropContainerProps) => {
     <SplitPane
       Left={<div className="text-center">{renderDropPinForm()}</div>}
       Right={<PinDropMap setCurr={props.setCurr} currPin={props.currPin} />}
+      className="h-5/6"
     />
   );
 };

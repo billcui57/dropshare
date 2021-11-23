@@ -11,7 +11,7 @@ const PageHOC =
   ({ Component, title }: PageHOCProps) =>
   () => {
     return (
-      <div className={"flex flex-col h-screen"}>
+      <div className={"h-screen overflow-hidden"}>
         <Navigation title={title} className="m-4" />
         <Component />
         <footer className="ml-4">

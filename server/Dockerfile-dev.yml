@@ -1,5 +1,4 @@
-#  Dockerfile for Node Express Backend api (production)
-#  Not for monolithic backend - netify frontend, ec2 backend
+#  Dockerfile for Node Express Backend api (development)
 
 FROM node:14.17.5-alpine
 

@@ -5,11 +5,13 @@ import _ from "lodash";
 import PinView from "@/components/PinView";
 import { useRouter } from "next/router";
 import Button from "@/components/Input/Button";
+import { DEFAULT_LAT, DEFAULT_LNG } from "@/constants/map";
 
 type BrowseMapProps = {
   currPin: Pin;
   loadedPins: Pin[];
   setCurr: Function;
+  onChange?: any;
 };
 
 const BrowseMap = (props: BrowseMapProps) => {
@@ -28,6 +30,7 @@ const BrowseMap = (props: BrowseMapProps) => {
 
   const handleMapClick = ({ x, y, lat, lng, event }) => {
     props.setCurr({ lat: lat, lng: lng });
+    router.push(`/browse`);
   };
 
   const handlePinClick = (pin: Pin) => {
@@ -78,13 +81,20 @@ const BrowseMap = (props: BrowseMapProps) => {
     }
 
     return {
-      lat: 43.662349271526836,
-      lng: -79.37947646024934,
+      lat: DEFAULT_LAT,
+      lng: DEFAULT_LNG,
     };
   };
 
+  const handleChange = (e) => {
+    if (props.onChange) {
+      console.log(e);
+      props.onChange(e);
+    }
+  };
+
   return (
-    <React.Fragment>
+    <div className="h-full">
       <GoogleMapReact
         bootstrapURLKeys={{
           key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
@@ -93,6 +103,7 @@ const BrowseMap = (props: BrowseMapProps) => {
         defaultCenter={getDefaultCenter()}
         defaultZoom={15}
         onClick={handleMapClick}
+        onChange={handleChange}
       >
         {renderPins()}
       </GoogleMapReact>
@@ -105,7 +116,7 @@ const BrowseMap = (props: BrowseMapProps) => {
           {getDropPinText()}
         </Button>
       </div>
-    </React.Fragment>
+    </div>
   );
 };
 

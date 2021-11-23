@@ -11,4 +11,6 @@ router.delete("/:id", PinController.remove);
 
 router.put("/:id", PinController.edit);
 
+router.get("/nearby", PinController.listNearby);
+
 export default router;

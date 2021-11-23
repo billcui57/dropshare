@@ -51,9 +51,28 @@ const edit = async (req, res, next) => {
   }
 };
 
+const listNearby = async (req, res, next) => {
+  let { lng, lat, maxDistance } = req.query;
+
+  lng = parseFloat(lng);
+  lat = parseFloat(lat);
+  maxDistance = parseFloat(maxDistance);
+
+  try {
+    const nearbyPins = await PinService.listNearby(lng, lat, maxDistance);
+    const pinDTOArr = nearbyPins.map((pin) => {
+      return toPinDTO(pin);
+    });
+    res.send(pinDTOArr);
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export default {
   list,
   create,
   remove,
   edit,
+  listNearby,
 };

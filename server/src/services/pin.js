@@ -65,9 +65,25 @@ const edit = async (pinId, newPinInfo) => {
   return newPin.toObject();
 };
 
+const listNearby = async (lng, lat, maxDistance) => {
+  return await PinModel.find({
+    location: {
+      $nearSphere: {
+        $geometry: {
+          type: "Point",
+          coordinates: [lng, lat],
+        },
+        $maxDistance: maxDistance,
+      },
+    },
+    deleted: false,
+  }).lean();
+};
+
 export default {
   list,
   create,
   remove,
   edit,
+  listNearby,
 };

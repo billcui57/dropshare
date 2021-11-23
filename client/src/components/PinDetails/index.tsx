@@ -47,8 +47,8 @@ const PinDetails = (props: PinDetailsProps) => {
           topicColor="blue"
           className="col-span-2 "
         />
-        <div className="col-span-2 flex justify-center items-center">
-          <img src={props.pin.image} />
+        <div className="col-span-2 flex justify-center items-center ">
+          <img src={props.pin.image} className="max-w-lg" />
         </div>
       </div>
     </div>

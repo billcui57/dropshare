@@ -1,4 +1,4 @@
-# Dockerfile for client
+# Dockerfile for client (Development)
 
 # Stage 1: Build react client
 FROM node:14.17.5-alpine

@@ -46,6 +46,7 @@ const EditContainer = (props: EditContainerProps) => {
     <SplitPane
       Left={<div className="text-center">{renderEditPinForm()}</div>}
       Right={<PinDropMap setCurr={props.setCurr} currPin={selectedPin} />}
+      className="h-5/6"
     />
   );
 };
