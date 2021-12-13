@@ -88,7 +88,6 @@ const BrowseMap = (props: BrowseMapProps) => {
 
   const handleChange = (e) => {
     if (props.onChange) {
-      console.log(e);
       props.onChange(e);
     }
   };
@@ -111,7 +110,7 @@ const BrowseMap = (props: BrowseMapProps) => {
         <Button
           onClick={handleDropPin}
           type="primary"
-          className="absolute bottom-16"
+          className="absolute bottom-24"
         >
           {getDropPinText()}
         </Button>

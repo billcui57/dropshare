@@ -20,7 +20,7 @@ const DropContainer = (props: DropContainerProps) => {
     PinService.post(pinInfo)
       .then((data: Pin) => {
         props.setCurr(undefined);
-        router.push(`/browse/${data._id}`);
+        router.push(`/browse`);
       })
       .catch((err) => console.log(err));
   };

@@ -6,7 +6,7 @@ import DropPinForm from "@/components/Input/DropPinForm";
 import { PinService } from "@/services";
 import { useRouter } from "next/router";
 import SplitPane from "@/components/Layouts/SplitPane";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 type EditContainerProps = {
   selectedPinId: string;
@@ -16,12 +16,22 @@ type EditContainerProps = {
 const EditContainer = (props: EditContainerProps) => {
   const router = useRouter();
 
-  const selectedPin: Pin | undefined = useSelector(
-    getSelectorPinById(props.selectedPinId)
-  );
+  const [selectedPin, setSelectedPin] = useState<Pin | null>(null);
+
+  useEffect(() => {
+    PinService.get(props.selectedPinId)
+      .then((data) => {
+        setSelectedPin(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleEditPin = (pinInfo: Pin) => {
-    PinService.edit(selectedPin?._id, pinInfo)
+    PinService.edit(selectedPin?._id, {
+      ...pinInfo,
+      lat: selectedPin.lat,
+      lng: selectedPin.lng,
+    })
       .then((data) => {
         props.setCurr(undefined);
         router.push("/browse");
@@ -39,13 +49,24 @@ const EditContainer = (props: EditContainerProps) => {
         />
       );
     }
-    return <h1>Select a pin to edit first</h1>;
+    return <h1>Loading...</h1>;
   };
 
   return (
     <SplitPane
       Left={<div className="text-center">{renderEditPinForm()}</div>}
-      Right={<PinDropMap setCurr={props.setCurr} currPin={selectedPin} />}
+      Right={
+        <PinDropMap
+          setCurr={({ lat, lng }) => {
+            setSelectedPin({
+              ...selectedPin,
+              lat: lat,
+              lng: lng,
+            });
+          }}
+          currPin={selectedPin}
+        />
+      }
       className="h-5/6"
     />
   );

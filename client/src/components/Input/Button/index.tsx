@@ -15,7 +15,7 @@ const TYPES = {
 
 type ButtonProps = {
   type: string;
-  children: any;
+  children?: any;
   onClick: any;
   className?: string;
   hidden?: boolean;

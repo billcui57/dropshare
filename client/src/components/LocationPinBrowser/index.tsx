@@ -30,22 +30,22 @@ const LocationPinBrowser = (props: LocationPinBrowserProps) => {
   };
 
   const displayNearbyPins = () => {
-    if (!nearbyPins) {
-      return null;
-    }
-
     return (
       <div className="grid grid-cols-1 gap-4  ">
-        {nearbyPins.map((pin: Pin) => {
-          return (
-            <PinCard
-              pin={pin}
-              onClick={() => {
-                handleCardClick(pin);
-              }}
-            />
-          );
-        })}
+        {!nearbyPins ? (
+          <div className="flex justify-center">Loading...</div>
+        ) : (
+          nearbyPins.map((pin: Pin) => {
+            return (
+              <PinCard
+                pin={pin}
+                onClick={() => {
+                  handleCardClick(pin);
+                }}
+              />
+            );
+          })
+        )}
       </div>
     );
   };

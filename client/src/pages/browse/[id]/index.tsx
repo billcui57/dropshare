@@ -1,14 +1,17 @@
 import React, { useState } from "react";
 
 import PageHOC from "@/pages/template";
-import BrowseContainer from "@/containers/Browse";
 import { useRouter } from "next/router";
+import DetailsContainer from "@/containers/Details";
 
-const BrowsePage = () => {
+const DetailsPage = () => {
   const router = useRouter();
 
   const pinId = router.query.id;
 
-  return <BrowseContainer selectedPinId={pinId} />;
+  if (pinId) {
+    return <DetailsContainer selectedPinId={pinId} />;
+  }
+  return null;
 };
-export default PageHOC({ Component: BrowsePage, title: "Browse Around" });
+export default PageHOC({ Component: DetailsPage, title: "Pin Details" });

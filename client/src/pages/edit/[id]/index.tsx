@@ -8,6 +8,9 @@ const EditPage = () => {
 
   const pinId: string = router.query.id;
 
-  return <EditContainer selectedPinId={pinId} />;
+  if (pinId) {
+    return <EditContainer selectedPinId={pinId} />;
+  }
+  return null;
 };
 export default PageHOC({ Component: EditPage, title: "Edit your pin" });

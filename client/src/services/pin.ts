@@ -32,4 +32,11 @@ const listNearby = async (lng, lat, maxDistance) => {
   return pins.data;
 };
 
-export default { list, post, remove, edit, listNearby };
+const get = async (pinId) => {
+  const result = await axios.get(
+    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`
+  );
+  return result.data;
+};
+
+export default { list, post, remove, edit, listNearby, get };
