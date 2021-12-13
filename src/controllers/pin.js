@@ -69,10 +69,24 @@ const listNearby = async (req, res, next) => {
   }
 };
 
+const get = async (req, res, next) => {
+  const { id } = req.params;
+
+  console.log(id);
+
+  try {
+    const pin = await PinService.get(id);
+    return res.send(toPinDTO(pin));
+  } catch (err) {
+    return next(err);
+  }
+};
+
 export default {
   list,
   create,
   remove,
   edit,
   listNearby,
+  get,
 };

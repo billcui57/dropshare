@@ -5,6 +5,11 @@ const list = async () => {
   return await PinModel.find({ deleted: false }).lean();
 };
 
+const get = async (id) => {
+  console.log(id);
+  return await PinModel.findById(id).lean();
+};
+
 const create = async (pinInfo) => {
   const { error } = PinValidator.validate(pinInfo);
 
@@ -60,6 +65,7 @@ const edit = async (pinId, newPinInfo) => {
   newPin.category = newPinInfo.category;
   newPin.subcategory = newPinInfo.subcategory;
   newPin.image = newPinInfo.image;
+  newPin.location.coordinates = [newPinInfo.lng, newPinInfo.lat];
   await newPin.save();
 
   return newPin.toObject();
@@ -86,4 +92,5 @@ export default {
   remove,
   edit,
   listNearby,
+  get,
 };

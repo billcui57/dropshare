@@ -13,4 +13,6 @@ router.put("/:id", PinController.edit);
 
 router.get("/nearby", PinController.listNearby);
 
+router.get("/:id", PinController.get);
+
 export default router;
