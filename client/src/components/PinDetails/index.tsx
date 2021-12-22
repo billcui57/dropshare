@@ -4,6 +4,7 @@ import DetailsText from "@/components/TextStyling/DetailsText";
 import { Rating } from "src/types/rating";
 import { PinUtil } from "@/utils";
 import PinStar from "@/components/PinStar";
+import _ from "lodash";
 
 type PinDetailsProps = {
   pin: Pin;
@@ -26,7 +27,7 @@ const PinDetails = (props: PinDetailsProps) => {
           disclaimer={`${props.pin.remainingCount} left!`}
           disclaimerColor="red"
         />
-        {props.pin.ratings && (
+        {!_.isEmpty(props.pin.ratings) && (
           <PinStar score={PinUtil.getAverageRating(props.pin.ratings)} />
         )}
       </div>
