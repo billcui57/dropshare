@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
+
 import { CATEGORIES } from "@/constants/pin";
 
 const PinSchema = new mongoose.Schema(
@@ -43,6 +44,12 @@ const PinSchema = new mongoose.Schema(
       type: String, //base 64
       required: false,
     },
+    ratings: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "RatingSchema",
+      },
+    ],
   },
   { timestamps: true }
 );
