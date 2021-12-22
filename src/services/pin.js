@@ -45,8 +45,6 @@ const remove = async (pinId) => {
 };
 
 const edit = async (pinId, newPinInfo) => {
-  console.log(newPinInfo);
-
   const oldPin = await PinModel.findById(pinId);
 
   if (!oldPin) {
