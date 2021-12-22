@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Pin } from "src/types/pin";
 import DetailsText from "@/components/TextStyling/DetailsText";
+import { Rating } from "src/types/rating";
+import { PinUtil } from "@/utils";
+import PinStar from "@/components/PinStar";
 
 type PinDetailsProps = {
   pin: Pin;
@@ -10,7 +13,7 @@ const PinDetails = (props: PinDetailsProps) => {
   if (!props.pin) {
     return null;
   }
-
+  console.log(props.pin.ratings);
   return (
     <div>
       <div className={`flex justify-center mb-4`}>
@@ -23,6 +26,9 @@ const PinDetails = (props: PinDetailsProps) => {
           disclaimer={`${props.pin.remainingCount} left!`}
           disclaimerColor="red"
         />
+        {props.pin.ratings && (
+          <PinStar score={PinUtil.getAverageRating(props.pin.ratings)} />
+        )}
       </div>
       <div className="grid grid-cols-2 gap-4 justify-center items-center mb-4">
         <DetailsText

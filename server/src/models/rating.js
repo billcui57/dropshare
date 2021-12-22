@@ -1,15 +1,21 @@
-import { Schema, model } from 'mongoose'
+import { Schema, model } from "mongoose";
 
-const RatingSchema = new Schema({
-  user: {
-    type: String, required: true
+const RatingSchema = new Schema(
+  {
+    score: {
+      type: Number,
+      required: true,
+    },
+    pin: {
+      type: String,
+      required: true,
+    },
+    numTaken: {
+      type: Number,
+      required: true,
+    },
   },
-  comment: {
-    type: String, required: false,
-  },
-  isUpVote: {
-    type: Boolean, required: true
-  }
-}, { timestamps: true })
+  { timestamps: true }
+);
 
-export default model('RatingSchema', RatingSchema)
+export default model("RatingSchema", RatingSchema);

@@ -19,14 +19,8 @@ type DeletePinModalProps = {
 
 const DeletePinModal = (props: DeletePinModalProps) => {
   const handleDelete = () => {
-    PinService.remove(props.pin._id)
-      .then((data) => {
-        props.remove(props.pin._id);
-        props.handleClose();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    props.remove(props.pin._id);
+    props.handleClose();
   };
 
   return (

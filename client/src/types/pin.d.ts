@@ -10,4 +10,5 @@ export type Pin = {
   category: typeof CATEGORIES[number];
   subcategory: typeof FOOD_SUBCATEGORIES[number];
   image: string; //base64
+  ratings: Rating[];
 };

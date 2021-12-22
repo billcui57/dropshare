@@ -1,17 +1,18 @@
 import Button from "@/components/Input/Button";
 import React, { useEffect, useState } from "react";
-import { PinService } from "@/services";
+import { PinService, RatingService } from "@/services";
 import PinDetails from "@/components/PinDetails";
-import DeletePinModal from "@/components/Modals/DeletePinModal";
+import RatePinModal from "@/components/Modals/RatePinModal";
 import ButtonContainer from "@/components/Input/ButtonContainer";
 import { useRouter } from "next/router";
+import { Rating } from "src/types/rating";
 
 type DetailsContainerProps = {
   selectedPinId: string;
 };
 
 const DetailsContainer = (props: DetailsContainerProps) => {
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isRateModalOpen, setIsRateModalOpen] = useState(false);
   const [selectedPin, setSelectedPin] = useState(false);
 
   useEffect(() => {
@@ -23,6 +24,17 @@ const DetailsContainer = (props: DetailsContainerProps) => {
   }, []);
 
   const router = useRouter();
+
+  const handleRate = (ratingInfo: Rating) => {
+    RatingService.post(ratingInfo)
+      .then(() => {
+        setIsRateModalOpen(false);
+        router.reload(window.location.pathname);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   const displayDetails = () => {
     return (
@@ -40,28 +52,21 @@ const DetailsContainer = (props: DetailsContainerProps) => {
           <Button
             type="primary"
             onClick={() => {
-              router.push(`/edit/${selectedPin._id}`);
+              setIsRateModalOpen(true);
             }}
           >
-            Edit Pin
+            Rate
           </Button>
-          <Button
-            type="secondary"
-            onClick={() => {
-              setIsDeleteModalOpen(true);
-            }}
-          >
-            Remove Pin
-          </Button>
+          {/* ask how many did you take */}
         </ButtonContainer>
 
-        <DeletePinModal
+        <RatePinModal
           pin={selectedPin}
-          isOpen={isDeleteModalOpen}
+          isOpen={isRateModalOpen}
           handleClose={() => {
-            setIsDeleteModalOpen(false);
-            router.push(`/browse`);
+            setIsRateModalOpen(false);
           }}
+          rate={handleRate}
         />
       </React.Fragment>
     );

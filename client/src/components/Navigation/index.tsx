@@ -12,22 +12,16 @@ type NavigationProps = {
 };
 
 const Navigation = (props: NavigationProps) => {
-  const handleLoginClick = () => {
-    router.push("/browse");
-  };
-
   return (
-    <div className={`flex justify-between items-center ${props.className}`}>
+    <div className={` ${props.className}`}>
       <Link href="/">
         <a className={`text-${BLUE} font-bold`}>drop-share.com</a>
       </Link>
-      <StyledText text={props.title} size="title" />
-      <ButtonContainer>
-        <Button type="secondary">Sign Up</Button>
-        <Button type="primary" onClick={handleLoginClick}>
-          Login
-        </Button>
-      </ButtonContainer>
+      <StyledText
+        text={props.title}
+        size="title"
+        className="flex justify-center"
+      />
     </div>
   );
 };

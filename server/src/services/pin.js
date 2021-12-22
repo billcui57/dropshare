@@ -2,12 +2,11 @@ import { PinModel } from "@/models";
 import { PinValidator } from "@/validators";
 
 const list = async () => {
-  return await PinModel.find({ deleted: false }).lean();
+  return await PinModel.find({ deleted: false }).populate("ratings").lean();
 };
 
 const get = async (id) => {
-  console.log(id);
-  return await PinModel.findById(id).lean();
+  return await PinModel.findById(id).populate("ratings").lean();
 };
 
 const create = async (pinInfo) => {
@@ -27,6 +26,7 @@ const create = async (pinInfo) => {
       type: "Point",
       coordinates: [pinInfo.lng, pinInfo.lat],
     },
+    ratings: [],
     image: pinInfo.image,
   });
 
@@ -45,6 +45,8 @@ const remove = async (pinId) => {
 };
 
 const edit = async (pinId, newPinInfo) => {
+  console.log(newPinInfo);
+
   const oldPin = await PinModel.findById(pinId);
 
   if (!oldPin) {
@@ -66,6 +68,7 @@ const edit = async (pinId, newPinInfo) => {
   newPin.subcategory = newPinInfo.subcategory;
   newPin.image = newPinInfo.image;
   newPin.location.coordinates = [newPinInfo.lng, newPinInfo.lat];
+  newPin.ratings = newPinInfo.ratings;
   await newPin.save();
 
   return newPin.toObject();
@@ -83,7 +86,9 @@ const listNearby = async (lng, lat, maxDistance) => {
       },
     },
     deleted: false,
-  }).lean();
+  })
+    .populate("ratings")
+    .lean();
 };
 
 export default {
