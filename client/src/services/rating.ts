@@ -1,8 +1,10 @@
 import axios from "axios";
+import { buildUrl } from "./utils";
 
 const post = async (rating) => {
+
   const result = await axios.post(
-    `${process.env.NEXT_PUBLIC_API}/ratings`,
+    buildUrl("/ratings"),
     rating
   );
   return result.data;

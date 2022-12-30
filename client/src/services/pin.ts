@@ -1,41 +1,35 @@
 import axios from "axios";
+import { buildUrl } from "./utils";
 
 const list = async () => {
-  const pins = await axios.get(`${process.env.NEXT_PUBLIC_API}/pins`);
+  const pins = await axios.get(buildUrl("/pins"));
   return pins.data;
 };
 
 const post = async (pin) => {
-  const result = await axios.post(`${process.env.NEXT_PUBLIC_API}/pins`, pin);
+  const result = await axios.post(buildUrl("/pins"), pin);
   return result.data;
 };
 
 const remove = async (pinId) => {
-  const result = await axios.delete(
-    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`
-  );
+  const result = await axios.delete(buildUrl(`/pins/${pinId}`));
   return result.data;
 };
 
 const edit = async (pinId, newPin) => {
-  const result = await axios.put(
-    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`,
-    newPin
-  );
+  const result = await axios.put(buildUrl(`/pins/${pinId}`), newPin);
   return result.data;
 };
 
 const listNearby = async (lng, lat, maxDistance) => {
-  const pins = await axios.get(`${process.env.NEXT_PUBLIC_API}/pins/nearby`, {
+  const pins = await axios.get(buildUrl(`/pins/nearby`), {
     params: { lng: lng, lat: lat, maxDistance: maxDistance },
   });
   return pins.data;
 };
 
 const get = async (pinId) => {
-  const result = await axios.get(
-    `${process.env.NEXT_PUBLIC_API}/pins/${pinId}`
-  );
+  const result = await axios.get(buildUrl(`/pins/${pinId}`));
   return result.data;
 };
 

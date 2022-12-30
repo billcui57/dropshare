@@ -31,24 +31,6 @@ services:
       - "27017:27017"
     networks:
       - app-network
-  client:
-    restart: always
-    build:
-      context: ./client
-      dockerfile: Dockerfile
-    image: dropshare-client
-    container_name: dropshare-react-client
-    command: yarn dev
-    volumes:
-      - ./client/:/usr/app
-      - /usr/app/node_modules
-    depends_on:
-      - server
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-    expose: [3000]
 
 networks:
   app-network:
